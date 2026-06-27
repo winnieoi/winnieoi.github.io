@@ -14,128 +14,146 @@ body{font-family:"Inter",sans-serif;background:radial-gradient(circle at top lef
 .page{max-width:1240px;margin:0 auto}
 .resume{background:rgba(12,8,20,.8);border:1px solid var(--line);border-radius:32px;overflow:hidden;box-shadow:var(--shadow);backdrop-filter:blur(8px);}
 
-/* HERO */
-.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:32px;padding:48px 42px;background:radial-gradient(circle at 20% 0%,rgba(255,79,179,.15),transparent 30%),linear-gradient(135deg,rgba(255,255,255,.03),rgba(255,255,255,.01));border-bottom:1px solid var(--line);position:relative;overflow:hidden;}
+/* ═══ HERO ═══ */
+.hero{padding:48px 42px;background:radial-gradient(circle at 20% 0%,rgba(255,79,179,.15),transparent 30%),linear-gradient(135deg,rgba(255,255,255,.03),rgba(255,255,255,.01));border-bottom:1px solid var(--line);position:relative;overflow:hidden;}
 .hero::after{content:"";position:absolute;top:-60px;right:-60px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(139,92,246,.25),transparent 70%);pointer-events:none;}
 .eyebrow{display:inline-flex;align-items:center;gap:10px;padding:8px 16px;border:1px solid rgba(255,255,255,.12);border-radius:999px;color:#ffd4ee;font-size:13px;letter-spacing:.08em;text-transform:uppercase;background:rgba(255,255,255,.03);margin-bottom:20px;backdrop-filter:blur(4px);}
-h1{font-size:56px;line-height:1.05;letter-spacing:-.04em;margin-bottom:16px;font-weight:800;}
+h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-weight:800;}
 .accent{background:linear-gradient(90deg,var(--pink-soft),#fff 40%,#d8c7ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
-.intro{font-size:17px;color:#ddd4ec;max-width:640px;line-height:1.75;}
-.hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.intro{font-size:17px;color:#ddd4ec;max-width:700px;line-height:1.75;}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
 .pill{padding:9px 16px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid var(--line);color:#f4eeff;font-size:13px;backdrop-filter:blur(4px);transition:.2s}
 .pill:hover{border-color:rgba(255,126,200,.3);background:rgba(255,79,179,.08);}
-.hero-right{display:flex;flex-direction:column;gap:20px;}
-.hero-card{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid var(--line);border-radius:24px;padding:24px;flex:1;}
-.hero-card h3{font-size:17px;margin-bottom:14px;color:var(--pink-soft);font-weight:600;}
-.hero-list{list-style:none;display:grid;gap:12px;color:var(--muted);font-size:14px}
-.hero-list li{display:flex;gap:12px;align-items:flex-start}
-.hero-list i{color:var(--pink-soft);margin-top:3px;flex-shrink:0;width:18px;text-align:center;}
-.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:18px}
-.stat{padding:16px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);text-align:center;transition:.2s}
-.stat:hover{border-color:rgba(139,92,246,.3);background:rgba(139,92,246,.06);}
-.stat strong{display:block;font-size:28px;color:#fff;font-weight:800;line-height:1.2}
-.stat span{font-size:12px;color:var(--muted);margin-top:4px;display:block}
 
-/* BODY LAYOUT */
-.body{display:grid;grid-template-columns:300px 1fr;gap:0;min-height:600px;}
-.sidebar{padding:32px 24px;background:rgba(255,255,255,.015);border-right:1px solid var(--line)}
-.main{padding:36px 40px}
+/* ═══ TAB NAVIGATION ═══ */
+.tab-nav{display:flex;gap:0;padding:0 42px;background:rgba(255,255,255,.015);border-bottom:1px solid var(--line);overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.tab-nav::-webkit-scrollbar{height:0}
+.tab-btn{display:flex;align-items:center;gap:8px;padding:14px 22px;background:none;border:none;color:var(--muted);font-family:"Inter",sans-serif;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .25s;white-space:nowrap;position:relative;border-bottom:2px solid transparent;}
+.tab-btn:hover{color:var(--pink-soft);background:rgba(255,79,179,.04);}
+.tab-btn.active{color:var(--pink-soft);border-bottom-color:var(--pink);}
+.tab-btn i{font-size:14px;}
 
-/* SECTION TITLES */
-.section{margin-bottom:36px}
-.section-title{display:flex;align-items:center;gap:12px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#f4bfdc;margin-bottom:18px;font-weight:600}
+/* ═══ TAB PANELS ═══ */
+.tab-panel{display:none;padding:36px 42px;animation:fadeUp .4s ease-out both;}
+.tab-panel.active{display:block;}
+
+/* ═══ LAYOUT ═══ */
+.two-col{display:grid;grid-template-columns:300px 1fr;gap:0;}
+.sidebar-col{padding:36px 32px 36px 0;border-right:1px solid var(--line);}
+.main-col{padding:36px 0 36px 36px;}
+
+/* ═══ SIDEBAR ═══ */
+.section{margin-bottom:28px}
+.section-title{display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#f4bfdc;margin-bottom:14px;font-weight:600}
 .section-title::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,rgba(255,79,179,.6),transparent)}
-
-/* SIDEBAR CARDS */
-.contact-list,.skill-list{display:grid;gap:12px}
-.contact-item,.skill-item,.edu-card,.quote-card{background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:18px;padding:14px 16px;transition:.2s}
+.contact-list,.skill-list{display:grid;gap:10px}
+.contact-item,.skill-item,.edu-card,.quote-card{background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:16px;padding:12px 14px;transition:.2s}
 .contact-item:hover,.skill-item:hover{border-color:rgba(255,79,179,.2);background:rgba(255,79,179,.04);}
-.contact-item{display:flex;gap:12px;align-items:flex-start;color:#eadff8;font-size:13px}
-.contact-item i{width:18px;color:var(--pink-soft);margin-top:2px;flex-shrink:0}
+.contact-item{display:flex;gap:10px;align-items:flex-start;color:#eadff8;font-size:13px}
+.contact-item i{width:18px;color:var(--pink-soft);margin-top:2px;flex-shrink:0;text-align:center}
 .contact-item a{color:inherit;text-decoration:none;transition:.15s}
 .contact-item a:hover{color:var(--pink-soft)}
-.skill-item h4,.edu-card h4{font-size:14px;margin-bottom:8px;color:#f7f1ff;font-weight:600}
+.skill-item h4,.edu-card h4{font-size:14px;margin-bottom:6px;color:#f7f1ff;font-weight:600}
 
-/* TOOL GRID */
-.software-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.software-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:12px 6px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);font-size:12px;color:#ddd4ec;transition:.2s;cursor:default}
+.software-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.software-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:10px 4px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);font-size:11px;color:#ddd4ec;transition:.2s;cursor:default}
 .software-item:hover{background:rgba(255,255,255,.08);border-color:rgba(255,79,179,.2);transform:translateY(-2px)}
-.software-item i{font-size:18px}
+.software-item i{font-size:16px}
 .software-item .adobe{color:#ff6bcb}.software-item .blender{color:#f5792a}.software-item .figma{color:#a259ff}.software-item .github{color:#6ee7f9}.software-item .vscode{color:#44b2f7}.software-item .cursor{color:#6ee7b7}.software-item .obsidian{color:#8b7cff}.software-item .td{color:#ff7ec8}.software-item .ios{color:#aaa}
 
-.tags{display:flex;flex-wrap:wrap;gap:7px}
-.tags span{padding:5px 11px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);font-size:11px;color:#ddd4ec;transition:.15s}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);font-size:10px;color:#ddd4ec;transition:.15s}
 .tags span:hover{background:rgba(255,79,179,.1);border-color:rgba(255,79,179,.25)}
 
 .quote-card{font-size:13px;color:#d8caec;line-height:1.7;font-style:italic;border-left:3px solid var(--pink);}
 
-/* LEAD CARD */
-.lead-card{background:linear-gradient(135deg,rgba(255,79,179,.14),rgba(139,92,246,.07));border:1px solid rgba(255,126,200,.2);border-radius:24px;padding:28px 32px;margin-bottom:32px;}
-.lead-card h2{font-size:26px;line-height:1.3;margin-bottom:12px;font-weight:700}
-.lead-card p{color:#e5daf6;line-height:1.8;font-size:15px}
+/* ═══ CONTENT SECTIONS ═══ */
+.sec-title{display:flex;align-items:center;gap:12px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#f4bfdc;margin-bottom:18px;font-weight:600}
+.sec-title::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,rgba(255,79,179,.6),transparent)}
 
-/* LINKS SECTION */
-.links-section{margin-top:36px;}
-.link-group{margin-bottom:32px;}
-.link-group-title{display:flex;align-items:center;gap:12px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#f4bfdc;margin-bottom:18px;font-weight:600}
-.link-group-title::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,rgba(255,79,179,.6),transparent)}
-.link-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;}
-.link-card{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:18px;padding:20px 22px;transition:.25s;text-decoration:none;color:var(--text);display:flex;align-items:center;gap:14px;}
+/* Lead */
+.lead-card{background:linear-gradient(135deg,rgba(255,79,179,.14),rgba(139,92,246,.07));border:1px solid rgba(255,126,200,.2);border-radius:20px;padding:24px 28px;margin-bottom:28px;}
+.lead-card h2{font-size:22px;line-height:1.3;margin-bottom:10px;font-weight:700}
+.lead-card p{color:#e5daf6;line-height:1.8;font-size:14px}
+
+/* Link Cards */
+.link-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;}
+.link-card{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:16px;padding:16px 18px;transition:.25s;text-decoration:none;color:var(--text);display:flex;align-items:center;gap:12px;}
 .link-card:hover{border-color:rgba(255,79,179,.3);background:rgba(255,79,179,.06);transform:translateY(-3px);box-shadow:0 8px 30px rgba(255,79,179,.1);}
-.link-card i{font-size:22px;color:var(--pink-soft);width:28px;text-align:center;flex-shrink:0;}
-.link-card .link-text{font-size:14px;font-weight:600;line-height:1.4;}
-.link-card .link-sub{font-size:11px;color:var(--muted);margin-top:2px;font-weight:400;}
+.link-card i{font-size:20px;color:var(--pink-soft);width:24px;text-align:center;flex-shrink:0;}
+.link-card .link-text{font-size:13px;font-weight:600;line-height:1.3;}
+.link-card .link-sub{font-size:10px;color:var(--muted);margin-top:2px;font-weight:400;}
 
-/* TWO COL */
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
-.info-card{background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:20px;padding:20px}
-.info-card h4{font-size:16px;margin-bottom:10px;color:#f7f1ff;font-weight:600}
-.bullet-list{list-style:none;display:grid;gap:10px}
-.bullet-list li{position:relative;padding-left:18px;color:#d8caec;font-size:14px;line-height:1.65}
-.bullet-list li::before{content:"";width:7px;height:7px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--violet));position:absolute;left:0;top:8px;flex-shrink:0}
+/* Case Study */
+.case-study{border:1px solid rgba(255,126,200,.18);background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));border-radius:22px;padding:28px;margin-bottom:24px;}
+.case-top{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:end;margin-bottom:18px}
+.case-top h3{font-size:26px;letter-spacing:-.03em;font-weight:700;line-height:1.2}
+.badge{padding:7px 14px;border-radius:999px;background:rgba(255,79,179,.1);color:#ffd5ea;border:1px solid rgba(255,126,200,.2);font-size:12px;white-space:nowrap;font-weight:500}
+.case-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0 18px}
+.summary-card{padding:14px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--line);transition:.2s}
+.summary-card:hover{border-color:rgba(139,92,246,.25);background:rgba(139,92,246,.05)}
+.summary-card label{display:block;color:#bcaed3;font-size:10px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;font-weight:500}
+.summary-card strong{font-size:14px;line-height:1.35}
+.case-gallery{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.case-gallery figure{background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:16px;padding:10px;overflow:hidden;transition:.2s}
+.case-gallery figure:hover{border-color:rgba(255,79,179,.2);transform:translateY(-3px)}
+.case-gallery img{width:100%;height:200px;object-fit:cover;display:block;border-radius:12px;background:#0d0918}
+.case-gallery figcaption{font-size:12px;color:#d5cae6;margin-top:8px;line-height:1.5}
 
-/* PROJECT GRID */
-.project-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-.project-card{padding:22px;border-radius:22px;background:rgba(255,255,255,.035);border:1px solid var(--line);transition:.25s;cursor:pointer}
+/* Project Grid */
+.project-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.project-card{padding:20px;border-radius:20px;background:rgba(255,255,255,.035);border:1px solid var(--line);transition:.25s;cursor:pointer}
 .project-card:hover{border-color:rgba(255,79,179,.25);background:rgba(255,79,179,.05);transform:translateY(-4px);box-shadow:0 12px 40px rgba(255,79,179,.1)}
-.project-card h4{font-size:17px;margin-bottom:8px;color:#fff;font-weight:600}
-.project-card p{font-size:13px;color:#d4c8e7;margin-bottom:12px;line-height:1.6}
+.project-card h4{font-size:16px;margin-bottom:6px;color:#fff;font-weight:600}
+.project-card p{font-size:13px;color:#d4c8e7;margin-bottom:10px;line-height:1.6}
 .project-card a{color:#ffc4e2;text-decoration:none;font-size:13px;font-weight:500;transition:.15s}
 .project-card a:hover{color:#ff7ec8;text-decoration:underline}
-.project-card .project-img{width:100%;height:180px;object-fit:cover;display:block;border-radius:14px;margin-bottom:14px;background:#0d0918}
+.project-card .project-img{width:100%;height:160px;object-fit:cover;display:block;border-radius:12px;margin-bottom:12px;background:#0d0918}
 
-/* TIMELINE */
-.timeline{display:grid;gap:20px}
-.timeline-item{position:relative;padding-left:24px;border-left:2px solid rgba(255,79,179,.2);padding-bottom:4px}
+/* Timeline */
+.timeline{display:grid;gap:18px}
+.timeline-item{position:relative;padding-left:22px;border-left:2px solid rgba(255,79,179,.2);padding-bottom:4px}
 .timeline-item::before{content:"";position:absolute;left:-5px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--pink);box-shadow:0 0 10px rgba(255,79,179,.4)}
-.timeline-head{display:flex;justify-content:space-between;gap:12px;margin-bottom:6px;align-items:flex-start;flex-wrap:wrap}
-.timeline-head h4{font-size:16px;font-weight:600;color:#fff}
-.timeline-head span{font-size:12px;color:#c8b8df;white-space:nowrap;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
-.sub{font-size:13px;color:#ffb9df;margin-bottom:10px;font-weight:500}
+.timeline-head{display:flex;justify-content:space-between;gap:12px;margin-bottom:4px;align-items:flex-start;flex-wrap:wrap}
+.timeline-head h4{font-size:15px;font-weight:600;color:#fff}
+.timeline-head span{font-size:11px;color:#c8b8df;white-space:nowrap;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
+.sub{font-size:12px;color:#ffb9df;margin-bottom:8px;font-weight:500}
+.bullet-list{list-style:none;display:grid;gap:8px}
+.bullet-list li{position:relative;padding-left:16px;color:#d8caec;font-size:13px;line-height:1.6}
+.bullet-list li::before{content:"";width:6px;height:6px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--violet));position:absolute;left:0;top:7px;flex-shrink:0}
 
-/* FOOTER */
-.footer-note{margin-top:20px;padding-top:20px;border-top:1px solid var(--line);color:#998db2;font-size:12px;text-align:center}
+/* Info Card */
+.info-card{background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:18px;padding:18px}
+.info-card h4{font-size:15px;margin-bottom:8px;color:#f7f1ff;font-weight:600}
 
-/* RESPONSIVE */
-@media(max-width:1000px){
-  .hero,.body,.two-col,.project-grid{grid-template-columns:1fr}
-  .sidebar{border-right:none;border-bottom:1px solid var(--line)}
-  h1{font-size:40px}
-  .main{padding:28px 20px}
-  .hero{padding:32px 24px}
+/* Footer */
+.footer-note{margin-top:16px;padding-top:16px;border-top:1px solid var(--line);color:#998db2;font-size:11px;text-align:center}
+
+/* Responsive */
+@media(max-width:900px){
+  .two-col{grid-template-columns:1fr}
+  .sidebar-col{border-right:none;border-bottom:1px solid var(--line);padding:24px 0}
+  .main-col{padding:24px 0}
+  h1{font-size:36px}
+  .tab-nav{padding:0 20px}
+  .tab-panel{padding:24px 20px}
+  .hero{padding:32px 20px}
+  .case-summary{grid-template-columns:1fr 1fr}
+  .project-grid{grid-template-columns:1fr}
 }
 @media(max-width:600px){
-  h1{font-size:32px}
-  .stats{grid-template-columns:1fr 1fr}
-  .software-grid{grid-template-columns:repeat(2,1fr)}
+  h1{font-size:28px}
+  .software-grid{grid-template-columns:repeat(3,1fr)}
   .link-grid{grid-template-columns:1fr}
-  body{padding:16px 10px 40px}
+  .case-gallery{grid-template-columns:1fr}
+  body{padding:16px 8px 40px}
   .resume{border-radius:20px}
+  .case-summary{grid-template-columns:1fr}
 }
 
-/* ANIMATION */
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.fade-up{animation:fadeUp .6s ease-out both}
+/* Animations */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fadeUp .5s ease-out both}
 .delay-1{animation-delay:.1s}.delay-2{animation-delay:.2s}.delay-3{animation-delay:.3s}.delay-4{animation-delay:.4s}
 </style>
 </head>
@@ -143,10 +161,9 @@ h1{font-size:56px;line-height:1.05;letter-spacing:-.04em;margin-bottom:16px;font
 <div class="page">
 <div class="resume">
 
-<!-- HERO -->
-<section class="hero">
-<div class="fade-up">
-  <div class="eyebrow"><i class="fa-solid fa-sparkles"></i> Links · 2026</div>
+<!-- HERO (always visible) -->
+<section class="hero fade-up">
+  <div class="eyebrow"><i class="fa-solid fa-sparkles"></i> Winnie's Space · 2026</div>
   <h1>Winnie 王钰涵<br><span class="accent">数字艺术 × AI 创意 × 视觉设计</span></h1>
   <p class="intro">艺术与科技专业在读，擅长将 AI 工具、生成艺术与交互设计融合，创作可被看见、被体验的数字作品。关注文化遗产数字化、手势交互与视觉表达。</p>
   <div class="hero-meta">
@@ -154,293 +171,363 @@ h1{font-size:56px;line-height:1.05;letter-spacing:-.04em;margin-bottom:16px;font
     <span class="pill">📅 2024 — 2028 · 大二在读</span>
     <span class="pill">📍 常驻长沙 · 可远程/到岗</span>
   </div>
+</section>
+
+<!-- TAB NAVIGATION -->
+<nav class="tab-nav fade-up">
+  <button class="tab-btn active" onclick="switchTab('home',this)"><i class="fa-solid fa-house"></i>首页</button>
+  <button class="tab-btn" onclick="switchTab('works',this)"><i class="fa-solid fa-palette"></i>作品</button>
+  <button class="tab-btn" onclick="switchTab('experience',this)"><i class="fa-solid fa-briefcase"></i>经历</button>
+  <button class="tab-btn" onclick="switchTab('about',this)"><i class="fa-solid fa-user"></i>关于</button>
+</nav>
+
+<!-- ═══ TAB 1: HOME ═══ -->
+<div class="tab-panel active" id="tab-home">
+<div class="two-col">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar-col">
+    <section class="section fade-up">
+      <div class="section-title"><i class="fa-solid fa-address-card"></i> 联系方式</div>
+      <div class="contact-list">
+        <div class="contact-item"><i class="fa-solid fa-phone"></i><div>199 0355 3288</div></div>
+        <div class="contact-item"><i class="fa-solid fa-envelope"></i><div><a href="mailto:winnieoi2006@gmail.com">winnieoi2006@gmail.com</a><br><a href="mailto:1095845822@qq.com">1095845822@qq.com</a></div></div>
+        <div class="contact-item"><i class="fa-brands fa-github"></i><div><a href="https://github.com/winnieoi" target="_blank">github.com/winnieoi</a></div></div>
+        <div class="contact-item"><i class="fa-solid fa-location-dot"></i><div>长沙 · 可线下/远程</div></div>
+      </div>
+    </section>
+
+    <section class="section fade-up delay-1">
+      <div class="section-title"><i class="fa-solid fa-graduation-cap"></i> 教育背景</div>
+      <div class="edu-card">
+        <h4>长沙师范学院</h4>
+        <p style="color:#ddd4ec;font-size:13px">艺术与科技专业 · 本科</p>
+        <p style="color:#bfaed8;font-size:12px;margin-top:6px">2024 — 2028 · 大二在读</p>
+      </div>
+    </section>
+
+    <section class="section fade-up delay-2">
+      <div class="section-title"><i class="fa-solid fa-screwdriver-wrench"></i> 工具技能</div>
+      <div class="software-grid">
+        <div class="software-item"><i class="fa-brands fa-adobe adobe"></i><span>Ai</span></div>
+        <div class="software-item"><i class="fa-brands fa-adobe adobe"></i><span>PS</span></div>
+        <div class="software-item"><i class="fa-solid fa-cube blender"></i><span>Blender</span></div>
+        <div class="software-item"><i class="fa-brands fa-figma figma"></i><span>Figma</span></div>
+        <div class="software-item"><i class="fa-brands fa-github github"></i><span>GitHub</span></div>
+        <div class="software-item"><i class="fa-solid fa-code vscode"></i><span>VS Code</span></div>
+        <div class="software-item"><i class="fa-solid fa-i-cursor cursor"></i><span>Cursor</span></div>
+        <div class="software-item"><i class="fa-solid fa-sticky-note obsidian"></i><span>Obsidian</span></div>
+        <div class="software-item"><i class="fa-solid fa-wand-magic-sparkles td"></i><span>TD</span></div>
+        <div class="software-item"><i class="fa-brands fa-apple ios"></i><span>iOS</span></div>
+      </div>
+    </section>
+
+    <section class="section fade-up delay-3">
+      <div class="section-title"><i class="fa-solid fa-palette"></i> UI/UX 技能</div>
+      <div class="skill-item" style="padding:12px 14px;margin-bottom:8px">
+        <h4>设计方法</h4>
+        <div class="tags" style="margin-top:6px"><span>用户调研</span><span>用户旅程图</span><span>信息架构</span><span>原型设计</span><span>可用性测试</span></div>
+      </div>
+      <div class="skill-item" style="padding:12px 14px">
+        <h4>输出能力</h4>
+        <div class="tags" style="margin-top:6px"><span>高保真原型</span><span>设计系统</span><span>交互说明文档</span><span>组件库搭建</span></div>
+      </div>
+    </section>
+
+    <section class="section fade-up delay-4">
+      <div class="section-title"><i class="fa-solid fa-heart"></i> 关键词</div>
+      <div class="quote-card">数字艺术 / 生成式视觉 / 文化遗产数字化 / AI 创意 / 手势交互 / 新媒体传播</div>
+    </section>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main-col">
+    <div class="lead-card fade-up">
+      <h2>用代码作笔，以粒子为墨——<br>在数字世界里创作有温度的艺术。</h2>
+      <p>我是一名数字艺术创作者，专注于 AI 生成艺术、手势交互与文化遗产数字化。以下是我近期的核心项目经历。</p>
+    </div>
+
+    <!-- FEATURED: HairLab -->
+    <section class="case-study fade-up">
+      <div class="case-top">
+        <div>
+          <div class="sec-title" style="margin-bottom:6px"><i class="fa-solid fa-mobile-screen-button"></i> 重点作品</div>
+          <h3>HairLab · AI 发型设计实验室</h3>
+          <p style="color:#d8caec;max-width:600px;margin-top:8px;line-height:1.7">一个融合 AI 图像生成与社区分享的发型设计概念 App。用户上传照片即可预览不同发型效果，结合生成式 AI 实现个性化发型推荐，并内置社区板块展示用户创作。</p>
+        </div>
+        <div class="badge">📱 App 概念 · 2026</div>
+      </div>
+      <div class="case-summary">
+        <div class="summary-card"><label>项目定位</label><strong>AI 发型预览<br>+ 社区分享平台</strong></div>
+        <div class="summary-card"><label>角色</label><strong>独立开发 / 概念策划<br>/ UI 设计 / 视觉包装</strong></div>
+        <div class="summary-card"><label>技术</label><strong>AI 图像生成<br>/ UI 交互设计</strong></div>
+        <div class="summary-card"><label>状态</label><strong>概念完成<br>/ 持续迭代中 ✨</strong></div>
+      </div>
+      <div class="case-gallery">
+        <figure>
+          <img src="hairlab1.jpg" alt="HairLab 界面预览" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'width:100%;height:200px;background:linear-gradient(135deg,#1a0e2e,#2a1540);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:64px\'>💇‍♀️</div><figcaption>📱 HairLab 主界面</figcaption>'">
+          <figcaption>📱 HairLab 主界面 · AI 发型推荐流程</figcaption>
+        </figure>
+        <figure>
+          <img src="hairlab2.jpg" alt="HairLab 社区页面" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'width:100%;height:200px;background:linear-gradient(135deg,#1a0e2e,#2a1540);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:64px\'>🎨</div><figcaption>🎨 社区分享页面</figcaption>'">
+          <figcaption>🎨 社区分享页面 · 用户作品展示</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Quick Links on Home -->
+    <section class="fade-up">
+      <div class="sec-title"><i class="fa-solid fa-link"></i> 快速链接</div>
+      <div class="link-grid">
+        <a class="link-card" href="https://winniespace.netlify.app" target="_blank"><i class="fa-solid fa-globe"></i><div><div class="link-text">个人作品集</div><div class="link-sub">winniespace.netlify.app</div></div></a>
+        <a class="link-card" href="https://github.com/winnieoi" target="_blank"><i class="fa-brands fa-github"></i><div><div class="link-text">GitHub</div><div class="link-sub">github.com/winnieoi</div></div></a>
+        <a class="link-card" href="mailto:winnieoi2006@gmail.com"><i class="fa-solid fa-envelope"></i><div><div class="link-text">邮箱</div><div class="link-sub">winnieoi2006@gmail.com</div></div></a>
+        <a class="link-card" href="https://www.figma.com" target="_blank"><i class="fa-brands fa-figma"></i><div><div class="link-text">Figma</div><div class="link-sub">设计作品</div></div></a>
+      </div>
+    </section>
+  </div>
+
 </div>
-<div class="hero-right fade-up delay-2">
-  <div class="hero-card">
-      <h3><i class="fa-solid fa-star" style="color:#ffd5ea;margin-right:6px"></i>我的优势</h3>
-      <ul class="hero-list">
-        <li><i class="fa-solid fa-wand-magic-sparkles"></i><span>AI 生成艺术 + TouchDesigner 粒子特效实战经验</span></li>
-        <li><i class="fa-solid fa-hand-pointer"></i><span>手势交互设计（MediaPipe + p5.js 实时识别）</span></li>
-        <li><i class="fa-solid fa-landmark"></i><span>文化遗产数字化：3D 扫描 + 粒子化再创作</span></li>
-      </ul>
-    </div>
-    <div class="stats">
-      <div class="stat"><strong>5+</strong><span>数字艺术项目</span></div>
-      <div class="stat"><strong>20+</strong><span>城市探索 · 审美输入</span></div>
-      <div class="stat"><strong>3</strong><span>技术栈融合实践</span></div>
-      <div class="stat"><strong>2</strong><span>GitHub 上线作品</span></div>
-    </div>
-  </div>
-</section>
+</div>
 
-<!-- BODY -->
-<div class="body">
+<!-- ═══ TAB 2: WORKS ═══ -->
+<div class="tab-panel" id="tab-works">
+<div class="lead-card fade-up">
+  <h2>我的作品集</h2>
+  <p>从 AI 生成艺术到手势交互，从文化遗产数字化到概念 App 设计——每个项目都是技术与美学的交汇点。</p>
+</div>
 
-<!-- SIDEBAR -->
-<aside class="sidebar">
-  <section class="section fade-up">
-    <div class="section-title"><i class="fa-solid fa-address-card"></i> 联系方式</div>
-    <div class="contact-list">
-      <div class="contact-item"><i class="fa-solid fa-phone"></i><div>199 0355 3288</div></div>
-      <div class="contact-item"><i class="fa-solid fa-envelope"></i><div><a href="mailto:winnieoi2006@gmail.com">winnieoi2006@gmail.com</a><br><a href="mailto:1095845822@qq.com">1095845822@qq.com</a></div></div>
-      <div class="contact-item"><i class="fa-brands fa-github"></i><div><a href="https://github.com/winnieoi" target="_blank">github.com/winnieoi</a></div></div>
-      <div class="contact-item"><i class="fa-solid fa-location-dot"></i><div>长沙 · 可线下/远程</div></div>
-    </div>
-  </section>
-
-  <section class="section fade-up delay-1">
-    <div class="section-title"><i class="fa-solid fa-graduation-cap"></i> 教育背景</div>
-    <div class="edu-card">
-      <h4>长沙师范学院</h4>
-      <p style="color:#ddd4ec;font-size:13px">艺术与科技专业 · 本科</p>
-      <p style="color:#bfaed8;font-size:12px;margin-top:8px">2024 — 2028 · 大二在读</p>
-    </div>
-  </section>
-
-  <section class="section fade-up delay-2">
-    <div class="section-title"><i class="fa-solid fa-screwdriver-wrench"></i> 工具技能</div>
-    <div class="software-grid">
-      <div class="software-item"><i class="fa-brands fa-adobe adobe"></i><span>Ai</span></div>
-      <div class="software-item"><i class="fa-brands fa-adobe adobe"></i><span>PS</span></div>
-      <div class="software-item"><i class="fa-solid fa-cube blender"></i><span>Blender</span></div>
-      <div class="software-item"><i class="fa-brands fa-figma figma"></i><span>Figma</span></div>
-      <div class="software-item"><i class="fa-brands fa-github github"></i><span>GitHub</span></div>
-      <div class="software-item"><i class="fa-solid fa-code vscode"></i><span>VS Code</span></div>
-      <div class="software-item"><i class="fa-solid fa-i-cursor cursor"></i><span>Cursor</span></div>
-      <div class="software-item"><i class="fa-solid fa-sticky-note obsidian"></i><span>Obsidian</span></div>
-      <div class="software-item"><i class="fa-solid fa-wand-magic-sparkles td"></i><span>TD</span></div>
-      <div class="software-item"><i class="fa-brands fa-apple ios"></i><span>iOS 开发</span></div>
-    </div>
-  </section>
-
-  <section class="section fade-up delay-3">
-    <div class="section-title"><i class="fa-solid fa-palette"></i> UI/UX 技能</div>
-    <div class="skill-item" style="padding:14px 16px;margin-bottom:10px">
-      <h4>设计方法</h4>
-      <div class="tags" style="margin-top:8px">
-        <span>用户调研</span><span>用户旅程图</span><span>信息架构</span><span>原型设计</span><span>可用性测试</span>
-      </div>
-    </div>
-    <div class="skill-item" style="padding:14px 16px">
-      <h4>输出能力</h4>
-      <div class="tags" style="margin-top:8px">
-        <span>高保真原型</span><span>设计系统</span><span>交互说明文档</span><span>组件库搭建</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="section fade-up delay-4">
-    <div class="section-title"><i class="fa-solid fa-heart"></i> 关键词</div>
-    <div class="quote-card">数字艺术 / 生成式视觉 / 文化遗产数字化 / AI 创意 / 手势交互 / 新媒体传播</div>
-  </section>
-</aside>
-
-<!-- MAIN -->
-<main class="main">
-
-<!-- LEAD -->
-<section class="lead-card fade-up">
-  <h2>用代码作笔，以粒子为墨——<br>在数字世界里创作有温度的艺术。</h2>
-  <p>我是一名数字艺术创作者，专注于 AI 生成艺术、手势交互与文化遗产数字化。以下是我近期的核心项目经历。</p>
-</section>
-
-<!-- LINK TREE -->
-<section class="links-section fade-up">
-  <div class="link-group">
-    <div class="link-group-title"><i class="fa-solid fa-link"></i> 我的链接</div>
-    <div class="link-grid">
-      <a class="link-card" href="https://winniespace.netlify.app" target="_blank">
-        <i class="fa-solid fa-globe"></i>
-        <div><div class="link-text">个人作品集</div><div class="link-sub">winniespace.netlify.app</div></div>
-      </a>
-      <a class="link-card" href="https://github.com/winnieoi" target="_blank">
-        <i class="fa-brands fa-github"></i>
-        <div><div class="link-text">GitHub</div><div class="link-sub">github.com/winnieoi</div></div>
-      </a>
-      <a class="link-card" href="mailto:winnieoi2006@gmail.com">
-        <i class="fa-solid fa-envelope"></i>
-        <div><div class="link-text">邮箱联系</div><div class="link-sub">winnieoi2006@gmail.com</div></div>
-      </a>
-      <a class="link-card" href="https://www.figma.com" target="_blank">
-        <i class="fa-brands fa-figma"></i>
-        <div><div class="link-text">Figma 作品</div><div class="link-sub">设计作品展示</div></div>
-      </a>
-    </div>
-  </div>
-
-  <div class="link-group">
-    <div class="link-group-title"><i class="fa-solid fa-diagram-project"></i> 在线作品</div>
-    <div class="link-grid">
-      <a class="link-card" href="https://winnieoi.github.io/-01/" target="_blank">
-        <i class="fa-solid fa-tree"></i>
-        <div><div class="link-text">圣诞树 · 生成艺术</div><div class="link-sub">基于 p5.js 的交互生成艺术</div></div>
-      </a>
-      <a class="link-card" href="https://winnieoi.github.io/Jade-Calendar/" target="_blank">
-        <i class="fa-solid fa-calendar-days"></i>
-        <div><div class="link-text">玉性日历 · Jade Calendar</div><div class="link-sub">东方审美 × 数字交互</div></div>
-      </a>
-      <a class="link-card" href="https://winnieoi.github.io/deep-sea-classroom/" target="_blank">
-        <i class="fa-solid fa-water"></i>
-        <div><div class="link-text">深海共生体 · 未来教室</div><div class="link-sub">材料智能感知与决策看板</div></div>
-      </a>
-      <a class="link-card" href="https://winnieoi.github.io/Musical-Map.github.io/" target="_blank">
-        <i class="fa-solid fa-music"></i>
-        <div><div class="link-text">Musical Map</div><div class="link-sub">音乐地图交互体验</div></div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- PROJECT: HairLab -->
-<section class="section case-study fade-up">
-  <div class="case-top">
-    <div>
-      <div class="section-title" style="margin-bottom:8px"><i class="fa-solid fa-mobile-screen-button"></i> 重点作品</div>
-      <h3>HairLab · AI 发型设计实验室</h3>
-      <p style="color:#d8caec;max-width:700px;margin-top:10px;line-height:1.7">一个融合 AI 图像生成与社区分享的发型设计概念 App。用户上传照片即可预览不同发型效果，结合生成式 AI 实现个性化发型推荐，并内置社区板块展示用户创作。</p>
-    </div>
-    <div class="badge">📱 App 概念设计 · 2026</div>
-  </div>
-  <div class="case-summary">
-    <div class="summary-card"><label>项目定位</label><strong>AI 发型预览<br>+ 社区分享平台</strong></div>
-    <div class="summary-card"><label>我的角色</label><strong>独立开发 / 概念策划<br>/ UI 设计 / 视觉包装</strong></div>
-    <div class="summary-card"><label>核心技术</label><strong>AI 图像生成<br>/ UI 交互设计</strong></div>
-    <div class="summary-card"><label>状态</label><strong>概念完成<br>/ 持续迭代中 ✨</strong></div>
-  </div>
-  <div class="case-gallery">
-    <figure>
-      <div style="width:100%;height:220px;background:linear-gradient(135deg,#1a0e2e,#2a1540);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:64px">💇‍♀️</div>
-      <figcaption>📱 HairLab 主界面 · AI 发型推荐流程</figcaption>
-    </figure>
-    <figure>
-      <div style="width:100%;height:220px;background:linear-gradient(135deg,#1a0e2e,#2a1540);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:64px">🎨</div>
-      <figcaption>🎨 社区分享页面 · 用户作品展示</figcaption>
-    </figure>
-  </div>
-</section>
-
-<!-- PROJECT: 极端天气手势交互 -->
-<section class="section fade-up">
-  <div class="section-title"><i class="fa-solid fa-hand"></i> 交互艺术项目</div>
+<!-- 交互艺术项目 -->
+<section class="fade-up">
+  <div class="sec-title"><i class="fa-solid fa-hand"></i> 交互艺术项目</div>
   <div class="project-grid">
     <div class="project-card">
-      <div style="height:180px;background:linear-gradient(135deg,#0d0918,#1a0e2e);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;font-size:48px">🌩️</div>
+      <div style="height:160px;background:linear-gradient(135deg,#0d0918,#1a0e2e);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:48px">🌩️</div>
       <h4>极端天气 · 手势控制数字生态</h4>
       <p>基于 MediaPipe + p5.js 的手势交互作品。用摄像头识别手势，手指捏合触发"极端天气"粒子风暴效果，探索人机交互与自然现象的数字艺术表达。</p>
     </div>
-
-    <!-- 文物粒子交互 -->
     <div class="project-card">
-      <div style="height:180px;background:linear-gradient(135deg,#0d0918,#1a1328);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;font-size:48px">🏺</div>
+      <div style="height:160px;background:linear-gradient(135deg,#0d0918,#1a1328);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:48px">🏺</div>
       <h4>数字文物 · 粒子化交互设计</h4>
       <p>将文化遗产 3D 模型进行粒子化重构，使用 TouchDesigner 实现粒子消散与重组动画，探索文物数字化的新视觉语言与交互可能。</p>
     </div>
   </div>
 </section>
 
-<!-- MORE WORKS -->
-<section class="section fade-up">
-  <div class="section-title"><i class="fa-solid fa-code"></i> 更多作品</div>
+<!-- 更多作品 -->
+<section class="fade-up">
+  <div class="sec-title"><i class="fa-solid fa-code"></i> 更多作品</div>
   <div class="project-grid">
     <div class="project-card">
-      <div style="height:180px;background:linear-gradient(135deg,#0d0918,#0a1a18);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;font-size:48px">🎄</div>
+      <div style="height:160px;background:linear-gradient(135deg,#0d0918,#0a1a18);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:48px">🎄</div>
       <h4>圣诞树 · 生成艺术</h4>
       <p>基于 p5.js 的交互生成艺术作品，用算法模拟自然生长形态，支持实时参数调节与导出。</p>
       <a href="https://winnieoi.github.io/-01/" target="_blank">🌐 在线预览 →</a>
     </div>
     <div class="project-card">
-      <div style="height:180px;background:linear-gradient(135deg,#0d0918,#1a1508);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;font-size:48px">🪨</div>
+      <div style="height:160px;background:linear-gradient(135deg,#0d0918,#1a1508);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:48px">🪨</div>
       <h4>玉性日历 · Jade Calendar</h4>
       <p>融合东方审美与数字交互的网页作品，以"玉"为意象构建沉浸式日历体验，强调材质感与时间的数字表达。</p>
       <a href="https://winnieoi.github.io/Jade-Calendar/" target="_blank">🌐 在线预览 →</a>
     </div>
-  </div>
-</section>
-
-<!-- EXPERIENCE -->
-<section class="section fade-up">
-  <div class="section-title"><i class="fa-solid fa-briefcase"></i> 项目经历</div>
-  <div class="timeline">
-    <div class="timeline-item">
-      <div class="timeline-head"><h4>Way to AGI Builder · 线上孵化营</h4><span>2026.6 至今 · Founder</span></div>
-      <div class="sub">二轮筛选入营 · AI 创业孵化 / XR 叙事导航</div>
-      <ul class="bullet-list">
-        <li>通过 Way to AGI Builder 二轮筛选进入线上孵化营，作为 Founder 提供项目方案与推进计划。</li>
-        <li>后续对接投资人和行业伙伴，持续扩展并推进 Hairlab 项目社区建设。</li>
-        <li>同步开展关于 citywalk 的 XR 空间叙事导航视觉化开发，已产出项目演示 Demo。</li>
-      </ul>
+    <div class="project-card">
+      <div style="height:160px;background:linear-gradient(135deg,#0d0918,#0a1a18);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:48px">🌊</div>
+      <h4>深海共生体 · 未来教室</h4>
+      <p>「深海共生体」未来教室材料智能感知与决策看板，探索未来教育空间的智能化视觉设计。</p>
+      <a href="https://winnieoi.github.io/deep-sea-classroom/" target="_blank">🌐 在线预览 →</a>
     </div>
-    <div class="timeline-item">
-      <div class="timeline-head"><h4>抖音 AI 黑客松</h4><span>2026.5 · 项目经历</span></div>
-      <div class="sub">AI 染发顾问 Demo · 计算机视觉 / 个性化推荐</div>
-      <ul class="bullet-list">
-        <li>抖音 AI 黑客松期间，带领团队在 24 小时内完成 AI 染发顾问 Demo。</li>
-        <li>项目结合计算机视觉与个性化推荐能力，为用户提供更直观的染发效果预览与决策支持。</li>
-      </ul>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-head"><h4>小红书黑客松 · 后续开发与应用包装</h4><span>2026 · 项目经历</span></div>
-      <div class="sub">产品概念深化 / 视觉包装 / 作品集整理</div>
-      <ul class="bullet-list">
-        <li>参与小红书黑客松活动，负责项目的后续开发迭代与视觉应用包装。</li>
-        <li>将黑客松原型转化为可展示的作品集级项目，完善交互流程与视觉呈现。</li>
-        <li>积累了从创意原型到完整作品包装的全流程经验。</li>
-      </ul>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-head"><h4>湖南卫视节目录制</h4><span>特邀参与</span></div>
-      <div class="sub">节目录制 · 现场内容协作</div>
-      <ul class="bullet-list">
-        <li>参与湖南卫视节目录制，体验专业媒体内容制作流程。</li>
-        <li>提升了公众场合的表达能力、应变能力与内容感知力。</li>
-      </ul>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-head"><h4>上海 Lets Vision 2026</h4><span>2026.3 · 上海</span></div>
-      <div class="sub">设计创意峰会 · 前沿视觉与 AI 设计交流</div>
-      <ul class="bullet-list">
-        <li>参与上海 Lets Vision 设计创意峰会，了解前沿视觉与设计趋势。</li>
-        <li>与设计师、创作者交流，拓展对 AI 与设计融合的认知边界。</li>
-      </ul>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-head"><h4>商业设计支持 · 海报与活动视觉</h4><span>项目制</span></div>
-      <div class="sub">平面输出 · 商业活动物料</div>
-      <ul class="bullet-list">
-        <li>参与商业海报与活动视觉制作，理解客户诉求并输出易传播的画面表达。</li>
-        <li>熟悉 PS、Canva、PR 等工具，能在有限时间内完成较完整的视觉呈现。</li>
-      </ul>
+    <div class="project-card">
+      <div style="height:160px;background:linear-gradient(135deg,#0d0918,#150a1a);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:48px">🎵</div>
+      <h4>Musical Map</h4>
+      <p>音乐地图交互体验，将听觉体验转化为可视化的空间叙事，探索音乐与地理的创意表达。</p>
+      <a href="https://winnieoi.github.io/Musical-Map.github.io/" target="_blank">🌐 在线预览 →</a>
     </div>
   </div>
 </section>
+</div>
 
-<!-- PERSONAL TEXTURE -->
-<section class="section fade-up">
-  <div class="section-title"><i class="fa-solid fa-compass"></i> 个人经历</div>
+<!-- ═══ TAB 3: EXPERIENCE ═══ -->
+<div class="tab-panel" id="tab-experience">
+  <div class="lead-card fade-up">
+    <h2>项目经历</h2>
+    <p>从黑客松到孵化营，从节目录制到设计峰会——每一次经历都在拓展我的创作边界。</p>
+  </div>
+
+  <section class="fade-up">
+    <div class="sec-title"><i class="fa-solid fa-rocket"></i> 项目经历</div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-head"><h4>Way to AGI Builder · 线上孵化营</h4><span>2026.6 至今 · Founder</span></div>
+        <div class="sub">二轮筛选入营 · AI 创业孵化 / XR 叙事导航</div>
+        <ul class="bullet-list">
+          <li>通过 Way to AGI Builder 二轮筛选进入线上孵化营，作为 Founder 提供项目方案与推进计划。</li>
+          <li>后续对接投资人和行业伙伴，持续扩展并推进 Hairlab 项目社区建设。</li>
+          <li>同步开展关于 citywalk 的 XR 空间叙事导航视觉化开发，已产出项目演示 Demo。</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-head"><h4>抖音 AI 黑客松</h4><span>2026.5 · 项目经历</span></div>
+        <div class="sub">AI 染发顾问 Demo · 计算机视觉 / 个性化推荐</div>
+        <ul class="bullet-list">
+          <li>抖音 AI 黑客松期间，带领团队在 24 小时内完成 AI 染发顾问 Demo。</li>
+          <li>项目结合计算机视觉与个性化推荐能力，为用户提供更直观的染发效果预览与决策支持。</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-head"><h4>小红书黑客松 · 后续开发与应用包装</h4><span>2026 · 项目经历</span></div>
+        <div class="sub">产品概念深化 / 视觉包装 / 作品集整理</div>
+        <ul class="bullet-list">
+          <li>参与小红书黑客松活动，负责项目的后续开发迭代与视觉应用包装。</li>
+          <li>将黑客松原型转化为可展示的作品集级项目，完善交互流程与视觉呈现。</li>
+          <li>积累了从创意原型到完整作品包装的全流程经验。</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-head"><h4>湖南卫视节目录制</h4><span>特邀参与</span></div>
+        <div class="sub">节目录制 · 现场内容协作</div>
+        <ul class="bullet-list">
+          <li>参与湖南卫视节目录制，体验专业媒体内容制作流程。</li>
+          <li>提升了公众场合的表达能力、应变能力与内容感知力。</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-head"><h4>上海 Lets Vision 2026</h4><span>2026.3 · 上海</span></div>
+        <div class="sub">设计创意峰会 · 前沿视觉与 AI 设计交流</div>
+        <ul class="bullet-list">
+          <li>参与上海 Lets Vision 设计创意峰会，了解前沿视觉与设计趋势。</li>
+          <li>与设计师、创作者交流，拓展对 AI 与设计融合的认知边界。</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-head"><h4>商业设计支持 · 海报与活动视觉</h4><span>项目制</span></div>
+        <div class="sub">平面输出 · 商业活动物料</div>
+        <ul class="bullet-list">
+          <li>参与商业海报与活动视觉制作，理解客户诉求并输出易传播的画面表达。</li>
+          <li>熟悉 PS、Canva、PR 等工具，能在有限时间内完成较完整的视觉呈现。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="fade-up" style="margin-top:28px">
+    <div class="sec-title"><i class="fa-solid fa-compass"></i> 个人经历</div>
+    <div class="two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div class="info-card">
+        <h4>🌍 独立旅行与在地体验</h4>
+        <ul class="bullet-list">
+          <li>走过 20+ 城市，通过独自旅行积累审美输入与观察视角。</li>
+          <li>摄影、在地文化体验为创作提供持续的灵感素材。</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h4>⛷️ 新疆滑雪义工 & 初创团队经历</h4>
+        <ul class="bullet-list">
+          <li>一个月滑雪场义工经历，具备较强适应能力与执行力。</li>
+          <li>加入初创团队，负责线上海报设计和视频剪辑工作，积累商业视觉输出经验。</li>
+          <li>热爱摄影、绘画、舞蹈、钢琴，多元兴趣支撑创作灵感。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══ TAB 4: ABOUT ═══ -->
+<div class="tab-panel" id="tab-about">
+  <div class="lead-card fade-up">
+    <h2>关于我</h2>
+    <p>用代码作笔，以粒子为墨。在数字世界里创作有温度的艺术。</p>
+  </div>
+
   <div class="two-col">
-    <div class="info-card">
-      <h4>🌍 独立旅行与在地体验</h4>
-      <ul class="bullet-list">
-        <li>走过 20+ 城市，通过独自旅行积累审美输入与观察视角。</li>
-        <li>摄影、在地文化体验为创作提供持续的灵感素材。</li>
-      </ul>
+    <div class="sidebar-col" style="border-right:none;border-bottom:1px solid var(--line);padding:0 0 24px 0">
+      <section class="section fade-up">
+        <div class="section-title"><i class="fa-solid fa-address-card"></i> 联系方式</div>
+        <div class="contact-list">
+          <div class="contact-item"><i class="fa-solid fa-phone"></i><div>199 0355 3288</div></div>
+          <div class="contact-item"><i class="fa-solid fa-envelope"></i><div><a href="mailto:winnieoi2006@gmail.com">winnieoi2006@gmail.com</a><br><a href="mailto:1095845822@qq.com">1095845822@qq.com</a></div></div>
+          <div class="contact-item"><i class="fa-brands fa-github"></i><div><a href="https://github.com/winnieoi" target="_blank">github.com/winnieoi</a></div></div>
+          <div class="contact-item"><i class="fa-solid fa-location-dot"></i><div>长沙 · 可线下/远程</div></div>
+        </div>
+      </section>
+      <section class="section fade-up delay-1">
+        <div class="section-title"><i class="fa-solid fa-graduation-cap"></i> 教育背景</div>
+        <div class="edu-card">
+          <h4>长沙师范学院</h4>
+          <p style="color:#ddd4ec;font-size:13px">艺术与科技专业 · 本科</p>
+          <p style="color:#bfaed8;font-size:12px;margin-top:6px">2024 — 2028 · 大二在读</p>
+        </div>
+      </section>
+      <section class="section fade-up delay-2">
+        <div class="section-title"><i class="fa-solid fa-screwdriver-wrench"></i> 工具技能</div>
+        <div class="software-grid">
+          <div class="software-item"><i class="fa-brands fa-adobe adobe"></i><span>Ai</span></div>
+          <div class="software-item"><i class="fa-brands fa-adobe adobe"></i><span>PS</span></div>
+          <div class="software-item"><i class="fa-solid fa-cube blender"></i><span>Blender</span></div>
+          <div class="software-item"><i class="fa-brands fa-figma figma"></i><span>Figma</span></div>
+          <div class="software-item"><i class="fa-brands fa-github github"></i><span>GitHub</span></div>
+          <div class="software-item"><i class="fa-solid fa-code vscode"></i><span>VS Code</span></div>
+          <div class="software-item"><i class="fa-solid fa-i-cursor cursor"></i><span>Cursor</span></div>
+          <div class="software-item"><i class="fa-solid fa-sticky-note obsidian"></i><span>Obsidian</span></div>
+          <div class="software-item"><i class="fa-solid fa-wand-magic-sparkles td"></i><span>TD</span></div>
+          <div class="software-item"><i class="fa-brands fa-apple ios"></i><span>iOS</span></div>
+        </div>
+      </section>
+      <section class="section fade-up delay-3">
+        <div class="section-title"><i class="fa-solid fa-palette"></i> UI/UX 技能</div>
+        <div class="skill-item" style="padding:12px 14px;margin-bottom:8px">
+          <h4>设计方法</h4>
+          <div class="tags" style="margin-top:6px"><span>用户调研</span><span>用户旅程图</span><span>信息架构</span><span>原型设计</span><span>可用性测试</span></div>
+        </div>
+        <div class="skill-item" style="padding:12px 14px">
+          <h4>输出能力</h4>
+          <div class="tags" style="margin-top:6px"><span>高保真原型</span><span>设计系统</span><span>交互说明文档</span><span>组件库搭建</span></div>
+        </div>
+      </section>
     </div>
-    <div class="info-card">
-      <h4>⛷️ 新疆滑雪义工 & 初创团队经历</h4>
-      <ul class="bullet-list">
-        <li>一个月滑雪场义工经历，具备较强适应能力与执行力。</li>
-        <li>加入初创团队，负责线上海报设计和视频剪辑工作，积累商业视觉输出经验。</li>
-        <li>热爱摄影、绘画、舞蹈、钢琴，多元兴趣支撑创作灵感。</li>
-      </ul>
+
+    <div class="main-col" style="padding:0 0 0 24px">
+      <section class="fade-up">
+        <div class="sec-title"><i class="fa-solid fa-link"></i> 全部链接</div>
+        <div class="link-grid" style="margin-bottom:28px">
+          <a class="link-card" href="https://winniespace.netlify.app" target="_blank"><i class="fa-solid fa-globe"></i><div><div class="link-text">个人作品集</div><div class="link-sub">winniespace.netlify.app</div></div></a>
+          <a class="link-card" href="https://github.com/winnieoi" target="_blank"><i class="fa-brands fa-github"></i><div><div class="link-text">GitHub</div><div class="link-sub">github.com/winnieoi</div></div></a>
+          <a class="link-card" href="mailto:winnieoi2006@gmail.com"><i class="fa-solid fa-envelope"></i><div><div class="link-text">邮箱联系</div><div class="link-sub">winnieoi2006@gmail.com</div></div></a>
+          <a class="link-card" href="https://www.figma.com" target="_blank"><i class="fa-brands fa-figma"></i><div><div class="link-text">Figma 作品</div><div class="link-sub">设计作品展示</div></div></a>
+        </div>
+      </section>
+
+      <section class="fade-up">
+        <div class="sec-title"><i class="fa-solid fa-diagram-project"></i> 在线作品</div>
+        <div class="link-grid">
+          <a class="link-card" href="https://winnieoi.github.io/-01/" target="_blank"><i class="fa-solid fa-tree"></i><div><div class="link-text">圣诞树 · 生成艺术</div><div class="link-sub">p5.js 交互生成艺术</div></div></a>
+          <a class="link-card" href="https://winnieoi.github.io/Jade-Calendar/" target="_blank"><i class="fa-solid fa-calendar-days"></i><div><div class="link-text">玉性日历</div><div class="link-sub">东方审美 × 数字交互</div></div></a>
+          <a class="link-card" href="https://winnieoi.github.io/deep-sea-classroom/" target="_blank"><i class="fa-solid fa-water"></i><div><div class="link-text">深海共生体</div><div class="link-sub">未来教室决策看板</div></div></a>
+          <a class="link-card" href="https://winnieoi.github.io/Musical-Map.github.io/" target="_blank"><i class="fa-solid fa-music"></i><div><div class="link-text">Musical Map</div><div class="link-sub">音乐地图交互体验</div></div></a>
+        </div>
+      </section>
+
+      <section class="fade-up" style="margin-top:28px">
+        <div class="sec-title"><i class="fa-solid fa-heart"></i> 关键词</div>
+        <div class="quote-card">数字艺术 / 生成式视觉 / 文化遗产数字化 / AI 创意 / 手势交互 / 新媒体传播</div>
+      </section>
     </div>
   </div>
-</section>
+</div>
 
-</main>
 </div>
 
 <div class="footer-note">&copy; 2026 王钰涵 · 数字艺术作品集 · 仅供展示</div>
 </div>
 </div>
+
+<script>
+function switchTab(tab, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: document.querySelector('.tab-nav').offsetTop - 10, behavior: 'smooth' });
+}
+</script>
 </body>
 </html>
