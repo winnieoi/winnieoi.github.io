@@ -955,7 +955,55 @@ function animateCounters() {
 animateCounters();
 
 // ═══════════════════════════════════════
-// MAGNETIC BUTTON EFFECT (CTA)
+// SECTION INDICATOR (left side dots)
+// ═══════════════════════════════════════
+(function() {
+  const dots = document.querySelectorAll('.section-dot');
+  const sections = ['hero', 'tab-home', 'tab-works', 'tab-experience', 'tab-about'];
+
+  // Click to scroll
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const target = document.getElementById(dot.dataset.target);
+      if (target) {
+        const tabMap = { hero: 0, 'tab-home': 0, 'tab-works': 1, 'tab-experience': 2, 'tab-about': 3 };
+        const tabName = dot.dataset.target.replace('tab-', '');
+        const idx = tabMap[dot.dataset.target];
+        if (idx !== undefined && idx !== 0) {
+          const btns = document.querySelectorAll('.tab-btn');
+          if (btns[idx]) switchTab(tabName, btns[idx]);
+        }
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Update active dot on scroll
+  function updateIndicator() {
+    let current = 'hero';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= window.innerHeight * 0.4) current = id;
+      }
+    });
+    dots.forEach(d => d.classList.remove('active'));
+    const activeDot = document.querySelector(`.section-dot[data-target="${current}"]`);
+    if (activeDot) activeDot.classList.add('active');
+  }
+
+  // Show indicator on scroll
+  const indicator = document.getElementById('sectionIndicator');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 200) indicator.style.opacity = '1';
+    else indicator.style.opacity = '0';
+    updateIndicator();
+  }, { passive: true });
+})();
+
+// ═══════════════════════════════════════
+// MAGNETIC BUTTON EFFECT
 // ═══════════════════════════════════════
 const ctaBtn = document.querySelector('.cta-btn');
 if (ctaBtn) {
