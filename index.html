@@ -15,7 +15,7 @@ body{font-family:"Inter",sans-serif;background:radial-gradient(circle at top lef
 .resume{background:rgba(12,8,20,.8);border:1px solid var(--line);border-radius:32px;overflow:hidden;box-shadow:var(--shadow);backdrop-filter:blur(8px);position:relative;z-index:2}
 
 /* ═══ PARTICLE CANVAS ═══ */
-#particles-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.6}
+#particles-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.5}
 
 /* ═══ HERO ═══ */
 .hero{padding:48px 42px;background:radial-gradient(circle at 20% 0%,rgba(255,79,179,.15),transparent 30%),linear-gradient(135deg,rgba(255,255,255,.03),rgba(255,255,255,.01));border-bottom:1px solid var(--line);position:relative;overflow:hidden;}
@@ -58,7 +58,7 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
 .section-dot:hover .dot-label{opacity:1}
 
 /* ═══ TAB PANELS ═══ */
-.tab-panel{display:none;padding:0;opacity:0;transform:translateY(12px);transition:opacity .4s ease,transform .4s ease}
+.tab-panel{display:none;padding:36px 42px;opacity:0;transform:translateY(12px);transition:opacity .4s ease,transform .4s ease}
 .tab-panel.active{display:block;opacity:1;transform:translateY(0)}
 
 /* ═══ SCROLL ANIMATIONS ═══ */
@@ -271,8 +271,8 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
 <!-- TAB NAVIGATION -->
 <nav class="tab-nav gsap-fade">
   <button class="tab-btn active" onclick="switchTab('home',this)"><i class="fa-solid fa-house"></i>首页</button>
-  <button class="tab-btn" onclick="switchTab('works',this)"><i class="fa-solid fa-palette"></i>作品</button>
   <button class="tab-btn" onclick="switchTab('experience',this)"><i class="fa-solid fa-briefcase"></i>经历</button>
+  <button class="tab-btn" onclick="switchTab('works',this)"><i class="fa-solid fa-palette"></i>作品</button>
   <button class="tab-btn" onclick="switchTab('about',this)"><i class="fa-solid fa-user"></i>关于</button>
 </nav>
 
@@ -455,10 +455,10 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
       <h4 style="margin-top:10px">HairLab · AI 发型设计实验室</h4>
       <p>融合 AI 图像生成与社区分享的发型设计概念 App，个性化发型推荐与社区展示。</p>
     </div>
-    <div class="project-card gsap-fade delay-1" data-category="spatial" data-name="SparePower 闲置Token 公益积分 开源">
-      <div style="height:160px;background:linear-gradient(135deg,#0d0918,#140c20);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:48px;transition:transform .3s">⚡</div>
-      <h4>余力 SparePower · 公益积分制网站</h4>
-      <p>让闲置 Token 重新流通的公益积分制网站。星光计划 BuilderUp 核心开发项目，已在 GitHub 开源。</p>
+    <div class="project-card gsap-fade delay-1" data-category="spatial" data-name="SparePower Token回收站 环保 循环">
+      <div style="height:160px;background:linear-gradient(135deg,#0d0918,#0a1a10);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:48px;transition:transform .3s">♻️</div>
+      <h4>余力 SparePower · Token 回收站</h4>
+      <p>环保回收可循环主题——让闲置 Token 重新流通的公益积分制网站。星光计划 BuilderUp 核心开发项目，已在 GitHub 开源。</p>
       <a href="https://sparepower-landing.vercel.app/" target="_blank">🔗 查看网站 →</a>
     </div>
     <div class="project-card gsap-fade" data-category="spatial" data-name="空间叙事 CitywalkAR 实景应用">
@@ -493,9 +493,9 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
     <div class="timeline">
       <div class="timeline-item">
         <div class="timeline-head"><h4>星光计划 BuilderUp · AdventureX 长沙站</h4><span>2026.6.28 · 核心开发</span></div>
-        <div class="sub">由 AdventureX 举办 · 公益积分制网站开发</div>
+        <div class="sub">环保回收可循环主题 · Token 回收站开发</div>
         <ul class="bullet-list">
-          <li>参加星光计划 BuilderUp（AdventureX 举办）长沙站，作为核心人员参与开发 <strong>余力 SparePower</strong>——让闲置 Token 重新流通的公益积分制网站。</li>
+          <li>参加星光计划 BuilderUp（AdventureX 举办）长沙站，作为核心人员参与开发 <strong>余力 SparePower</strong>——一个以环保回收可循环为主题的 Token 回收站，让闲置 Token 重新流通。</li>
           <li>项目已在 GitHub 开源，<a href="https://sparepower-landing.vercel.app/" target="_blank" style="color:var(--pink-soft)">点此查看</a>。</li>
         </ul>
       </div>
@@ -517,11 +517,12 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
         </ul>
       </div>
       <div class="timeline-item">
-        <div class="timeline-head"><h4>小红书黑客松 · 后续开发与应用包装</h4><span>2026 · 项目经历</span></div>
-        <div class="sub">产品概念深化 / 视觉包装 / 作品集整理</div>
+        <div class="timeline-head"><h4>小红书黑客松 · Urpia 情感地图社区</h4><span>2026 · 项目经历</span></div>
+        <div class="sub">参与 Urpia 情感地图社区的后续开发与项目迭代</div>
         <ul class="bullet-list">
-          <li>参与小红书黑客松活动，负责项目的后续开发迭代与视觉应用包装。</li>
-          <li>将黑客松原型转化为可展示的作品集级项目，完善交互流程与视觉呈现。</li>
+          <li>参与小红书黑客松活动，负责 <strong>Urpia 情感地图社区</strong> 的后续开发项目与持续迭代。</li>
+          <li>完善产品交互流程与视觉应用包装，将原型转化为可展示的作品集级项目。</li>
+          <li>积累了从创意原型到完整作品包装的全流程经验。</li>
         </ul>
       </div>
       <div class="timeline-item">
@@ -666,8 +667,8 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
 <div class="section-indicator" id="sectionIndicator">
   <div class="section-dot active" data-target="hero"><span class="dot-label">首页</span></div>
   <div class="section-dot" data-target="tab-home"><span class="dot-label">简介</span></div>
-  <div class="section-dot" data-target="tab-works"><span class="dot-label">作品</span></div>
   <div class="section-dot" data-target="tab-experience"><span class="dot-label">经历</span></div>
+  <div class="section-dot" data-target="tab-works"><span class="dot-label">作品</span></div>
   <div class="section-dot" data-target="tab-about"><span class="dot-label">关于</span></div>
 </div>
 
@@ -813,7 +814,7 @@ class Particle {
 }
 
 // Create particles
-for (let i = 0; i < 60; i++) {
+for (let i = 0; i < 35; i++) {
   particles.push(new Particle());
 }
 
@@ -830,7 +831,7 @@ function animateParticles() {
       const dx = particles[i].x - particles[j].x;
       const dy = particles[i].y - particles[j].y;
       const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < 120) {
+      if (dist < 80) {
         ctx.beginPath();
         ctx.moveTo(particles[i].x, particles[i].y);
         ctx.lineTo(particles[j].x, particles[j].y);
@@ -1049,7 +1050,7 @@ animateCounters();
     dot.addEventListener('click', () => {
       const target = document.getElementById(dot.dataset.target);
       if (target) {
-        const tabMap = { hero: 0, 'tab-home': 0, 'tab-works': 1, 'tab-experience': 2, 'tab-about': 3 };
+        const tabMap = { hero: 0, 'tab-home': 0, 'tab-works': 2, 'tab-experience': 1, 'tab-about': 3 };
         const tabName = dot.dataset.target.replace('tab-', '');
         const idx = tabMap[dot.dataset.target];
         if (idx !== undefined && idx !== 0) {
@@ -1131,7 +1132,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // ═══════════════════════════════════════
 window.addEventListener('DOMContentLoaded', () => {
   const hash = window.location.hash.replace('#', '');
-  const tabMap = { home: 0, works: 1, experience: 2, about: 3 };
+  const tabMap = { home: 0, experience: 1, works: 2, about: 3 };
   if (tabMap[hash] !== undefined) {
     const btn = document.querySelectorAll('.tab-btn')[tabMap[hash]];
     switchTab(hash, btn);
