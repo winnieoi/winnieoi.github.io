@@ -48,8 +48,17 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
 .tab-btn i{font-size:14px;transition:transform .3s}
 .tab-btn:hover i{transform:scale(1.2)}
 
+/* ═══ SIDE SECTION INDICATOR ═══ */
+.section-indicator{position:fixed;left:8px;top:50%;transform:translateY(-50%);z-index:50;display:flex;flex-direction:column;gap:12px;opacity:0;transition:opacity .3s}
+.section-indicator:hover{opacity:1}
+.section-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.15);cursor:pointer;transition:all .3s;position:relative}
+.section-dot:hover{background:rgba(255,79,179,.5);transform:scale(1.3)}
+.section-dot.active{background:var(--pink-soft);box-shadow:0 0 10px rgba(255,126,200,.5);transform:scale(1.3)}
+.section-dot .dot-label{position:absolute;left:16px;top:50%;transform:translateY(-50%);white-space:nowrap;font-size:11px;color:var(--muted);background:rgba(12,8,20,.9);padding:4px 10px;border-radius:6px;border:1px solid var(--line);opacity:0;pointer-events:none;transition:opacity .2s}
+.section-dot:hover .dot-label{opacity:1}
+
 /* ═══ TAB PANELS ═══ */
-.tab-panel{display:none;padding:36px 42px;opacity:0;transform:translateY(12px);transition:opacity .4s ease,transform .4s ease}
+.tab-panel{display:none;padding:0;opacity:0;transform:translateY(12px);transition:opacity .4s ease,transform .4s ease}
 .tab-panel.active{display:block;opacity:1;transform:translateY(0)}
 
 /* ═══ SCROLL ANIMATIONS ═══ */
@@ -183,16 +192,16 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
 
 /* ═══ RESPONSIVE ═══ */
 @media(max-width:900px){
+  .tab-panel{padding:24px 20px}
   .two-col{grid-template-columns:1fr}
   .sidebar-col{border-right:none;border-bottom:1px solid var(--line);padding:24px 0}
   .main-col{padding:24px 0}
   h1{font-size:36px}
   .tab-nav{padding:0 20px}
-  .tab-panel{padding:24px 20px}
   .hero{padding:32px 20px}
-  .cta-area{padding:32px 20px}
   .case-summary{grid-template-columns:1fr 1fr}
   .project-grid{grid-template-columns:1fr}
+  .section-indicator{display:none}
 }
 @media(max-width:600px){
   h1{font-size:28px}
@@ -237,15 +246,6 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
     <span class="pill">📍 常驻长沙 · 可远程/到岗</span>
   </div>
 </section>
-
-<!-- CTA AREA WITH PARTICLES -->
-<div class="cta-area gsap-fade" id="cta">
-  <h2>✨ 探索我的创意世界</h2>
-  <p>从概念到现实，用代码和设计连接想象</p>
-  <button class="cta-btn animate-pulse-glow" onclick="switchTab('works', document.querySelectorAll('.tab-btn')[1])">
-    <i class="fa-solid fa-rocket"></i> 浏览作品集
-  </button>
-</div>
 
 <!-- TAB NAVIGATION -->
 <nav class="tab-nav gsap-fade">
@@ -425,6 +425,17 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
       <h4 style="margin-top:10px">HairLab · AI 发型设计实验室</h4>
       <p>融合 AI 图像生成与社区分享的发型设计概念 App，个性化发型推荐与社区展示。</p>
     </div>
+    <div class="project-card gsap-fade delay-1" data-category="spatial" data-name="SparePower 闲置Token 公益积分 开源">
+      <div style="height:160px;background:linear-gradient(135deg,#0d0918,#140c20);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:48px;transition:transform .3s">⚡</div>
+      <h4>余力 SparePower · 公益积分制网站</h4>
+      <p>让闲置 Token 重新流通的公益积分制网站。星光计划 BuilderUp 核心开发项目，已在 GitHub 开源。</p>
+      <a href="https://sparepower-landing.vercel.app/" target="_blank">🔗 查看网站 →</a>
+    </div>
+    <div class="project-card gsap-fade" data-category="spatial" data-name="空间叙事 XR 应用">
+      <img src="" alt="空间叙事XR" class="project-img" style="height:200px" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'width:100%;height:160px;background:linear-gradient(135deg,#0d0918,#1a1328);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:48px\'>🌐</div><figcaption style=\'text-align:center;font-size:11px;color:var(--muted);margin-top:6px\'>即将上线</figcaption>'">
+      <h4>空间叙事 · XR 应用</h4>
+      <p>基于 XR 技术的空间叙事应用，探索沉浸式交互体验与城市空间的故事化表达。</p>
+    </div>
     <div class="project-card gsap-fade delay-1" data-category="spatial" data-name="深海共生体 未来教室 材料 感知 决策">
       <div style="height:160px;background:linear-gradient(135deg,#0d0918,#0a1a18);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:48px;transition:transform .3s">🌊</div>
       <h4>深海共生体 · 未来教室</h4>
@@ -450,6 +461,14 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
   <section class="gsap-fade">
     <div class="sec-title"><i class="fa-solid fa-rocket"></i> 项目经历</div>
     <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-head"><h4>星光计划 BuilderUp · AdventureX 长沙站</h4><span>2026.6.28 · 核心开发</span></div>
+        <div class="sub">由 AdventureX 举办 · 公益积分制网站开发</div>
+        <ul class="bullet-list">
+          <li>参加星光计划 BuilderUp（AdventureX 举办）长沙站，作为核心人员参与开发 <strong>余力 SparePower</strong>——让闲置 Token 重新流通的公益积分制网站。</li>
+          <li>项目已在 GitHub 开源，<a href="https://sparepower-landing.vercel.app/" target="_blank" style="color:var(--pink-soft)">点此查看</a>。</li>
+        </ul>
+      </div>
       <div class="timeline-item">
         <div class="timeline-head"><h4>Way to AGI Builder · 线上孵化营</h4><span>2026.6 至今 · Founder</span></div>
         <div class="sub">二轮筛选入营 · AI 创业孵化 / XR 叙事导航</div>
@@ -611,6 +630,15 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
 
 <div class="footer-note">&copy; 2026 王钰涵 · 数字艺术作品集 · 仅供展示</div>
 </div>
+</div>
+
+<!-- SECTION INDICATOR -->
+<div class="section-indicator" id="sectionIndicator">
+  <div class="section-dot active" data-target="hero"><span class="dot-label">首页</span></div>
+  <div class="section-dot" data-target="tab-home"><span class="dot-label">简介</span></div>
+  <div class="section-dot" data-target="tab-works"><span class="dot-label">作品</span></div>
+  <div class="section-dot" data-target="tab-experience"><span class="dot-label">经历</span></div>
+  <div class="section-dot" data-target="tab-about"><span class="dot-label">关于</span></div>
 </div>
 
 <!-- IMAGE MODAL -->
