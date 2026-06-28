@@ -338,13 +338,13 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
         <div class="summary-card"><label>状态</label><strong>概念完成<br>/ 持续迭代中 ✨</strong></div>
       </div>
       <div class="case-gallery">
-        <figure onclick="showJumpPrompt('此为抖音AI创变者黑客松作品——抖音精选赛道', 'https://winnieoi.github.io/hairlab/')" style="cursor:pointer">
-          <img src="hairlab-cover.jpg" alt="HairLab 界面预览" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'width:100%;height:200px;background:linear-gradient(135deg,#1a0e2e,#2a1540);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:64px\'>💇‍♀️</div><figcaption>📱 HairLab 主界面</figcaption>'">
-          <figcaption>📱 HairLab 主界面 · AI 发型推荐流程 <span style="color:var(--pink-soft);font-size:11px">[点击跳转]</span></figcaption>
+        <figure onclick="openModal('hairlab1.jpg','HairLab 主界面 · AI 发型推荐流程')">
+          <img src="hairlab1.jpg" alt="HairLab 界面预览" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'width:100%;height:200px;background:linear-gradient(135deg,#1a0e2e,#2a1540);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:64px\'>💇‍♀️</div><figcaption>📱 HairLab 主界面</figcaption>'">
+          <figcaption>📱 HairLab 主界面 · AI 发型推荐流程 <span style="color:var(--pink-soft);font-size:11px">[点击放大]</span></figcaption>
         </figure>
-        <figure onclick="showJumpPrompt('此为抖音AI创变者黑客松作品——抖音精选赛道', 'https://winnieoi.github.io/hairlab/')" style="cursor:pointer">
-          <img src="hairlab1.jpg" alt="HairLab 社区页面" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'width:100%;height:200px;background:linear-gradient(135deg,#1a0e2e,#2a1540);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:64px\'>🎨</div><figcaption>🎨 社区分享页面</figcaption>'">
-          <figcaption>🎨 社区分享页面 · 用户作品展示 <span style="color:var(--pink-soft);font-size:11px">[点击跳转]</span></figcaption>
+        <figure onclick="openModal('hairlab2.jpg','社区分享页面 · 用户作品展示')">
+          <img src="hairlab2.jpg" alt="HairLab 社区页面" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'width:100%;height:200px;background:linear-gradient(135deg,#1a0e2e,#2a1540);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:64px\'>🎨</div><figcaption>🎨 社区分享页面</figcaption>'">
+          <figcaption>🎨 社区分享页面 · 用户作品展示 <span style="color:var(--pink-soft);font-size:11px">[点击放大]</span></figcaption>
         </figure>
       </div>
     </section>
@@ -393,7 +393,7 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
   <!-- Works Grid -->
   <div class="project-grid" id="works-grid">
     <div class="project-card gsap-fade" data-category="interactive" data-name="极端天气 手势 交互 粒子">
-      <img src="hairlab-cover.jpg" alt="极端天气" class="project-img" style="height:200px">
+      <div style="height:160px;background:linear-gradient(135deg,#0d0918,#1a0e2e);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:48px;transition:transform .3s">🌩️</div>
       <h4>极端天气 · 手势控制数字生态</h4>
       <p>基于 MediaPipe + p5.js 的手势交互作品。用摄像头识别手势，手指捏合触发"极端天气"粒子风暴效果。</p>
     </div>
@@ -406,13 +406,13 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
       <p>将文化遗产 3D 模型进行粒子化重构，使用 TouchDesigner 实现粒子消散与重组动画。</p>
     </div>
     <div class="project-card gsap-fade" data-category="generative" data-name="圣诞树 生成艺术 p5.js 算法">
-      <img src="hairlab-cover.jpg" alt="圣诞树" class="project-img" style="height:200px">
+      <div style="height:160px;background:linear-gradient(135deg,#0d0918,#0a1a18);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:48px;transition:transform .3s">🎄</div>
       <h4>圣诞树 · 生成艺术</h4>
       <p>基于 p5.js 的交互生成艺术作品，用算法模拟自然生长形态，支持实时参数调节与导出。</p>
       <a href="https://winnieoi.github.io/-01/" target="_blank">🌐 在线预览 →</a>
     </div>
     <div class="project-card gsap-fade delay-1" data-category="generative" data-name="玉性日历 Jade Calendar 东方 审美">
-      <img src="hairlab-cover.jpg" alt="玉性日历" class="project-img" style="height:200px">
+      <div style="height:160px;background:linear-gradient(135deg,#0d0918,#1a1508);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:48px;transition:transform .3s">🪨</div>
       <h4>玉性日历 · Jade Calendar</h4>
       <p>融合东方审美与数字交互的网页作品，以"玉"为意象构建沉浸式日历体验。</p>
       <a href="https://winnieoi.github.io/Jade-Calendar/" target="_blank">🌐 在线预览 →</a>
@@ -426,13 +426,13 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
       <p>融合 AI 图像生成与社区分享的发型设计概念 App，个性化发型推荐与社区展示。</p>
     </div>
     <div class="project-card gsap-fade delay-1" data-category="spatial" data-name="深海共生体 未来教室 材料 感知 决策">
-      <img src="hairlab-cover.jpg" alt="深海共生体" class="project-img" style="height:200px">
+      <div style="height:160px;background:linear-gradient(135deg,#0d0918,#0a1a18);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:48px;transition:transform .3s">🌊</div>
       <h4>深海共生体 · 未来教室</h4>
       <p>未来教室材料智能感知与决策看板，探索未来教育空间的智能化视觉设计。</p>
       <a href="https://winnieoi.github.io/deep-sea-classroom/" target="_blank">🌐 在线预览 →</a>
     </div>
     <div class="project-card gsap-fade" data-category="spatial" data-name="Musical Map 音乐 地图 交互 导航">
-      <img src="hairlab-cover.jpg" alt="Musical Map" class="project-img" style="height:200px">
+      <div style="height:160px;background:linear-gradient(135deg,#0d0918,#150a1a);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:48px;transition:transform .3s">🎵</div>
       <h4>Musical Map</h4>
       <p>音乐地图交互体验，将听觉体验转化为可视化的空间叙事，探索音乐与地理的创意表达。</p>
       <a href="https://winnieoi.github.io/Musical-Map.github.io/" target="_blank">🌐 在线预览 →</a>
