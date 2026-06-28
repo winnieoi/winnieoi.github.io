@@ -10,9 +10,12 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#0b0713;--bg-soft:#140c20;--card:#1a1328;--text:#f7f3ff;--muted:#b8accf;--line:rgba(255,255,255,.09);--pink:#ff4fb3;--pink-soft:#ff7ec8;--violet:#8b5cf6;--cyan:#6ee7f9;--shadow:0 20px 60px rgba(0,0,0,.35);}
-body{font-family:"Inter",sans-serif;background:radial-gradient(circle at top left,rgba(255,79,179,.1),transparent 30%),radial-gradient(circle at top right,rgba(139,92,246,.1),transparent 30%),linear-gradient(180deg,#0a0612 0%,#10081f 100%);color:var(--text);line-height:1.65;padding:32px 20px 60px;min-height:100vh;}
-.page{max-width:1240px;margin:0 auto}
-.resume{background:rgba(12,8,20,.8);border:1px solid var(--line);border-radius:32px;overflow:hidden;box-shadow:var(--shadow);backdrop-filter:blur(8px);}
+body{font-family:"Inter",sans-serif;background:radial-gradient(circle at top left,rgba(255,79,179,.1),transparent 30%),radial-gradient(circle at top right,rgba(139,92,246,.1),transparent 30%),linear-gradient(180deg,#0a0612 0%,#10081f 100%);color:var(--text);line-height:1.65;padding:32px 20px 60px;min-height:100vh;overflow-x:hidden;}
+.page{max-width:1240px;margin:0 auto;position:relative;z-index:1}
+.resume{background:rgba(12,8,20,.8);border:1px solid var(--line);border-radius:32px;overflow:hidden;box-shadow:var(--shadow);backdrop-filter:blur(8px);position:relative;z-index:2}
+
+/* ═══ PARTICLE CANVAS ═══ */
+#particles-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.6}
 
 /* ═══ HERO ═══ */
 .hero{padding:48px 42px;background:radial-gradient(circle at 20% 0%,rgba(255,79,179,.15),transparent 30%),linear-gradient(135deg,rgba(255,255,255,.03),rgba(255,255,255,.01));border-bottom:1px solid var(--line);position:relative;overflow:hidden;}
@@ -22,114 +25,163 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
 .accent{background:linear-gradient(90deg,var(--pink-soft),#fff 40%,#d8c7ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
 .intro{font-size:17px;color:#ddd4ec;max-width:700px;line-height:1.75;}
 .hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
-.pill{padding:9px 16px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid var(--line);color:#f4eeff;font-size:13px;backdrop-filter:blur(4px);transition:.2s}
-.pill:hover{border-color:rgba(255,126,200,.3);background:rgba(255,79,179,.08);}
+.pill{padding:9px 16px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid var(--line);color:#f4eeff;font-size:13px;backdrop-filter:blur(4px);transition:all .3s cubic-bezier(0.4,0,0.2,1)}
+.pill:hover{border-color:rgba(255,126,200,.3);background:rgba(255,79,179,.08);transform:translateY(-2px);box-shadow:0 4px 20px rgba(255,79,179,.15)}
+
+/* ═══ CTA BUTTON ═══ */
+.cta-area{position:relative;padding:40px 42px;text-align:center;overflow:hidden;border-bottom:1px solid var(--line)}
+.cta-area h2{font-size:24px;margin-bottom:8px;font-weight:700}
+.cta-area p{color:var(--muted);font-size:14px;margin-bottom:24px}
+.cta-btn{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;border-radius:999px;background:linear-gradient(135deg,var(--pink),var(--violet));color:#fff;font-family:"Inter",sans-serif;font-size:15px;font-weight:600;border:none;cursor:pointer;transition:all .3s cubic-bezier(0.4,0,0.2,1);box-shadow:0 4px 20px rgba(255,79,179,.3);position:relative;overflow:hidden}
+.cta-btn::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(255,255,255,.2));opacity:0;transition:opacity .3s}
+.cta-btn:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 8px 35px rgba(255,79,179,.4)}
+.cta-btn:hover::before{opacity:1}
+.cta-btn:active{transform:translateY(-1px) scale(0.98)}
 
 /* ═══ TAB NAVIGATION ═══ */
-.tab-nav{display:flex;gap:0;padding:0 42px;background:rgba(255,255,255,.015);border-bottom:1px solid var(--line);overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.tab-nav{display:flex;gap:0;padding:0 42px;background:rgba(255,255,255,.015);border-bottom:1px solid var(--line);overflow-x:auto;-webkit-overflow-scrolling:touch;position:sticky;top:0;z-index:10}
 .tab-nav::-webkit-scrollbar{height:0}
-.tab-btn{display:flex;align-items:center;gap:8px;padding:14px 22px;background:none;border:none;color:var(--muted);font-family:"Inter",sans-serif;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .25s;white-space:nowrap;position:relative;border-bottom:2px solid transparent;}
-.tab-btn:hover{color:var(--pink-soft);background:rgba(255,79,179,.04);}
-.tab-btn.active{color:var(--pink-soft);border-bottom-color:var(--pink);}
-.tab-btn i{font-size:14px;}
+.tab-btn{display:flex;align-items:center;gap:8px;padding:14px 22px;background:none;border:none;color:var(--muted);font-family:"Inter",sans-serif;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .25s cubic-bezier(0.4,0,0.2,1);white-space:nowrap;position:relative;border-bottom:2px solid transparent}
+.tab-btn:hover{color:var(--pink-soft);background:rgba(255,79,179,.04);transform:translateY(-1px)}
+.tab-btn.active{color:var(--pink-soft);border-bottom-color:var(--pink)}
+.tab-btn.active::after{content:"";position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);width:20px;height:2px;background:var(--pink-soft);border-radius:1px;box-shadow:0 0 8px rgba(255,126,200,.5)}
+.tab-btn i{font-size:14px;transition:transform .3s}
+.tab-btn:hover i{transform:scale(1.2)}
 
 /* ═══ TAB PANELS ═══ */
-.tab-panel{display:none;padding:36px 42px;animation:fadeUp .4s ease-out both;}
-.tab-panel.active{display:block;}
+.tab-panel{display:none;padding:36px 42px;opacity:0;transform:translateY(12px);transition:opacity .4s ease,transform .4s ease}
+.tab-panel.active{display:block;opacity:1;transform:translateY(0)}
+
+/* ═══ SCROLL ANIMATIONS ═══ */
+.gsap-fade{opacity:0;transform:translateY(20px);transition:opacity .6s cubic-bezier(0.4,0,0.2,1),transform .6s cubic-bezier(0.4,0,0.2,1)}
+.gsap-fade.visible{opacity:1;transform:translateY(0)}
+.gsap-fade.delay-1{transition-delay:.1s}
+.gsap-fade.delay-2{transition-delay:.2s}
+.gsap-fade.delay-3{transition-delay:.3s}
+.gsap-fade.delay-4{transition-delay:.4s}
 
 /* ═══ LAYOUT ═══ */
-.two-col{display:grid;grid-template-columns:300px 1fr;gap:0;}
-.sidebar-col{padding:36px 32px 36px 0;border-right:1px solid var(--line);}
-.main-col{padding:36px 0 36px 36px;}
+.two-col{display:grid;grid-template-columns:300px 1fr;gap:0}
+.sidebar-col{padding:36px 32px 36px 0;border-right:1px solid var(--line)}
+.main-col{padding:36px 0 36px 36px}
 
 /* ═══ SIDEBAR ═══ */
 .section{margin-bottom:28px}
 .section-title{display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#f4bfdc;margin-bottom:14px;font-weight:600}
 .section-title::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,rgba(255,79,179,.6),transparent)}
 .contact-list,.skill-list{display:grid;gap:10px}
-.contact-item,.skill-item,.edu-card,.quote-card{background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:16px;padding:12px 14px;transition:.2s}
-.contact-item:hover,.skill-item:hover{border-color:rgba(255,79,179,.2);background:rgba(255,79,179,.04);}
+.contact-item,.skill-item,.edu-card,.quote-card{background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:16px;padding:12px 14px;transition:all .25s cubic-bezier(0.4,0,0.2,1)}
+.contact-item:hover,.skill-item:hover{border-color:rgba(255,79,179,.2);background:rgba(255,79,179,.04);transform:translateX(4px)}
 .contact-item{display:flex;gap:10px;align-items:flex-start;color:#eadff8;font-size:13px}
 .contact-item i{width:18px;color:var(--pink-soft);margin-top:2px;flex-shrink:0;text-align:center}
-.contact-item a{color:inherit;text-decoration:none;transition:.15s}
+.contact-item a{color:inherit;text-decoration:none;transition:color .15s}
 .contact-item a:hover{color:var(--pink-soft)}
 .skill-item h4,.edu-card h4{font-size:14px;margin-bottom:6px;color:#f7f1ff;font-weight:600}
 
 .software-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
-.software-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:10px 4px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);font-size:11px;color:#ddd4ec;transition:.2s;cursor:default}
-.software-item:hover{background:rgba(255,255,255,.08);border-color:rgba(255,79,179,.2);transform:translateY(-2px)}
-.software-item i{font-size:16px}
+.software-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:10px 4px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);font-size:11px;color:#ddd4ec;transition:all .3s cubic-bezier(0.4,0,0.2,1);cursor:default}
+.software-item:hover{background:rgba(255,255,255,.08);border-color:rgba(255,79,179,.2);transform:translateY(-3px);box-shadow:0 6px 20px rgba(255,79,179,.1)}
+.software-item i{font-size:16px;transition:transform .3s}
+.software-item:hover i{transform:scale(1.15)}
 .software-item .adobe{color:#ff6bcb}.software-item .blender{color:#f5792a}.software-item .figma{color:#a259ff}.software-item .github{color:#6ee7f9}.software-item .vscode{color:#44b2f7}.software-item .cursor{color:#6ee7b7}.software-item .obsidian{color:#8b7cff}.software-item .td{color:#ff7ec8}.software-item .ios{color:#aaa}
 
 .tags{display:flex;flex-wrap:wrap;gap:6px}
-.tags span{padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);font-size:10px;color:#ddd4ec;transition:.15s}
-.tags span:hover{background:rgba(255,79,179,.1);border-color:rgba(255,79,179,.25)}
+.tags span{padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);font-size:10px;color:#ddd4ec;transition:all .25s cubic-bezier(0.4,0,0.2,1);cursor:pointer}
+.tags span:hover{background:rgba(255,79,179,.1);border-color:rgba(255,79,179,.25);transform:scale(1.05)}
+.tags span.active-tag{background:rgba(255,79,179,.15);border-color:var(--pink);color:var(--pink-soft)}
 
-.quote-card{font-size:13px;color:#d8caec;line-height:1.7;font-style:italic;border-left:3px solid var(--pink);}
+.quote-card{font-size:13px;color:#d8caec;line-height:1.7;font-style:italic;border-left:3px solid var(--pink)}
 
 /* ═══ CONTENT SECTIONS ═══ */
 .sec-title{display:flex;align-items:center;gap:12px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#f4bfdc;margin-bottom:18px;font-weight:600}
 .sec-title::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,rgba(255,79,179,.6),transparent)}
 
 /* Lead */
-.lead-card{background:linear-gradient(135deg,rgba(255,79,179,.14),rgba(139,92,246,.07));border:1px solid rgba(255,126,200,.2);border-radius:20px;padding:24px 28px;margin-bottom:28px;}
+.lead-card{background:linear-gradient(135deg,rgba(255,79,179,.14),rgba(139,92,246,.07));border:1px solid rgba(255,126,200,.2);border-radius:20px;padding:24px 28px;margin-bottom:28px;transition:all .3s}
+.lead-card:hover{border-color:rgba(255,126,200,.35);box-shadow:0 8px 30px rgba(255,79,179,.1);transform:translateY(-2px)}
 .lead-card h2{font-size:22px;line-height:1.3;margin-bottom:10px;font-weight:700}
 .lead-card p{color:#e5daf6;line-height:1.8;font-size:14px}
 
 /* Link Cards */
-.link-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;}
-.link-card{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:16px;padding:16px 18px;transition:.25s;text-decoration:none;color:var(--text);display:flex;align-items:center;gap:12px;}
-.link-card:hover{border-color:rgba(255,79,179,.3);background:rgba(255,79,179,.06);transform:translateY(-3px);box-shadow:0 8px 30px rgba(255,79,179,.1);}
-.link-card i{font-size:20px;color:var(--pink-soft);width:24px;text-align:center;flex-shrink:0;}
-.link-card .link-text{font-size:13px;font-weight:600;line-height:1.3;}
-.link-card .link-sub{font-size:10px;color:var(--muted);margin-top:2px;font-weight:400;}
+.link-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.link-card{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:16px;padding:16px 18px;transition:all .3s cubic-bezier(0.4,0,0.2,1);text-decoration:none;color:var(--text);display:flex;align-items:center;gap:12px;cursor:pointer;position:relative;overflow:hidden}
+.link-card::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,79,179,.1),rgba(139,92,246,.05));opacity:0;transition:opacity .3s}
+.link-card:hover{border-color:rgba(255,79,179,.3);transform:translateY(-4px) scale(1.02);box-shadow:0 12px 35px rgba(255,79,179,.15)}
+.link-card:hover::before{opacity:1}
+.link-card i{font-size:20px;color:var(--pink-soft);width:24px;text-align:center;flex-shrink:0;transition:transform .3s}
+.link-card:hover i{transform:scale(1.2) rotate(-5deg)}
+.link-card .link-text{font-size:13px;font-weight:600;line-height:1.3;position:relative;z-index:1}
+.link-card .link-sub{font-size:10px;color:var(--muted);margin-top:2px;font-weight:400;position:relative;z-index:1}
 
 /* Case Study */
-.case-study{border:1px solid rgba(255,126,200,.18);background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));border-radius:22px;padding:28px;margin-bottom:24px;}
+.case-study{border:1px solid rgba(255,126,200,.18);background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));border-radius:22px;padding:28px;margin-bottom:24px;transition:all .3s}
+.case-study:hover{border-color:rgba(255,126,200,.3);box-shadow:0 8px 30px rgba(255,79,179,.08)}
 .case-top{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:end;margin-bottom:18px}
-.case-top h3{font-size:26px;letter-spacing:-.03em;font-weight:700;line-height:1.2}
+.case-top h3{font-size:26px;letter-spacing:-.03em;font-weight:700;line-height:1.2;transition:color .3s}
+.case-study:hover .case-top h3{color:var(--pink-soft)}
 .badge{padding:7px 14px;border-radius:999px;background:rgba(255,79,179,.1);color:#ffd5ea;border:1px solid rgba(255,126,200,.2);font-size:12px;white-space:nowrap;font-weight:500}
 .case-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0 18px}
-.summary-card{padding:14px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--line);transition:.2s}
-.summary-card:hover{border-color:rgba(139,92,246,.25);background:rgba(139,92,246,.05)}
+.summary-card{padding:14px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--line);transition:all .3s cubic-bezier(0.4,0,0.2,1)}
+.summary-card:hover{border-color:rgba(139,92,246,.25);background:rgba(139,92,246,.05);transform:translateY(-2px)}
 .summary-card label{display:block;color:#bcaed3;font-size:10px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;font-weight:500}
 .summary-card strong{font-size:14px;line-height:1.35}
 .case-gallery{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
-.case-gallery figure{background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:16px;padding:10px;overflow:hidden;transition:.2s}
-.case-gallery figure:hover{border-color:rgba(255,79,179,.2);transform:translateY(-3px)}
-.case-gallery img{width:100%;height:200px;object-fit:cover;display:block;border-radius:12px;background:#0d0918}
+.case-gallery figure{background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:16px;padding:10px;overflow:hidden;transition:all .3s cubic-bezier(0.4,0,0.2,1);cursor:pointer}
+.case-gallery figure:hover{border-color:rgba(255,79,179,.2);transform:translateY(-4px) scale(1.01);box-shadow:0 12px 30px rgba(255,79,179,.1)}
+.case-gallery img{width:100%;height:200px;object-fit:cover;display:block;border-radius:12px;background:#0d0918;transition:transform .5s cubic-bezier(0.4,0,0.2,1)}
+.case-gallery figure:hover img{transform:scale(1.03)}
 .case-gallery figcaption{font-size:12px;color:#d5cae6;margin-top:8px;line-height:1.5}
 
 /* Project Grid */
 .project-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-.project-card{padding:20px;border-radius:20px;background:rgba(255,255,255,.035);border:1px solid var(--line);transition:.25s;cursor:pointer}
-.project-card:hover{border-color:rgba(255,79,179,.25);background:rgba(255,79,179,.05);transform:translateY(-4px);box-shadow:0 12px 40px rgba(255,79,179,.1)}
-.project-card h4{font-size:16px;margin-bottom:6px;color:#fff;font-weight:600}
+.project-card{padding:20px;border-radius:20px;background:rgba(255,255,255,.035);border:1px solid var(--line);transition:all .3s cubic-bezier(0.4,0,0.2,1);cursor:pointer;position:relative;overflow:hidden}
+.project-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--pink),var(--violet));transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(0.4,0,0.2,1)}
+.project-card:hover{border-color:rgba(255,79,179,.25);transform:translateY(-5px);box-shadow:0 16px 45px rgba(255,79,179,.12)}
+.project-card:hover::before{transform:scaleX(1)}
+.project-card h4{font-size:16px;margin-bottom:6px;color:#fff;font-weight:600;transition:color .3s}
+.project-card:hover h4{color:var(--pink-soft)}
 .project-card p{font-size:13px;color:#d4c8e7;margin-bottom:10px;line-height:1.6}
-.project-card a{color:#ffc4e2;text-decoration:none;font-size:13px;font-weight:500;transition:.15s}
+.project-card a{color:#ffc4e2;text-decoration:none;font-size:13px;font-weight:500;transition:all .2s}
 .project-card a:hover{color:#ff7ec8;text-decoration:underline}
-.project-card .project-img{width:100%;height:160px;object-fit:cover;display:block;border-radius:12px;margin-bottom:12px;background:#0d0918}
+.project-card .project-img{width:100%;height:160px;object-fit:cover;display:block;border-radius:12px;margin-bottom:12px;background:#0d0918;transition:transform .4s cubic-bezier(0.4,0,0.2,1)}
+.project-card:hover .project-img{transform:scale(1.02)}
 
 /* Timeline */
 .timeline{display:grid;gap:18px}
-.timeline-item{position:relative;padding-left:22px;border-left:2px solid rgba(255,79,179,.2);padding-bottom:4px}
-.timeline-item::before{content:"";position:absolute;left:-5px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--pink);box-shadow:0 0 10px rgba(255,79,179,.4)}
+.timeline-item{position:relative;padding-left:24px;border-left:2px solid rgba(255,79,179,.2);padding-bottom:6px;transition:all .3s}
+.timeline-item::before{content:"";position:absolute;left:-6px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--pink);box-shadow:0 0 10px rgba(255,79,179,.4);transition:all .3s}
+.timeline-item:hover{border-left-color:var(--pink)}
+.timeline-item:hover::before{box-shadow:0 0 20px rgba(255,79,179,.7);transform:scale(1.3)}
 .timeline-head{display:flex;justify-content:space-between;gap:12px;margin-bottom:4px;align-items:flex-start;flex-wrap:wrap}
-.timeline-head h4{font-size:15px;font-weight:600;color:#fff}
-.timeline-head span{font-size:11px;color:#c8b8df;white-space:nowrap;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
+.timeline-head h4{font-size:15px;font-weight:600;color:#fff;transition:color .3s}
+.timeline-item:hover .timeline-head h4{color:var(--pink-soft)}
+.timeline-head span{font-size:11px;color:#c8b8df;white-space:nowrap;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--line);transition:all .3s}
+.timeline-item:hover .timeline-head span{border-color:rgba(255,79,179,.3);background:rgba(255,79,179,.06)}
 .sub{font-size:12px;color:#ffb9df;margin-bottom:8px;font-weight:500}
 .bullet-list{list-style:none;display:grid;gap:8px}
-.bullet-list li{position:relative;padding-left:16px;color:#d8caec;font-size:13px;line-height:1.6}
-.bullet-list li::before{content:"";width:6px;height:6px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--violet));position:absolute;left:0;top:7px;flex-shrink:0}
+.bullet-list li{position:relative;padding-left:16px;color:#d8caec;font-size:13px;line-height:1.6;transition:all .2s}
+.bullet-list li::before{content:"";width:6px;height:6px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--violet));position:absolute;left:0;top:7px;flex-shrink:0;transition:transform .3s}
+.timeline-item:hover .bullet-list li::before{transform:scale(1.3)}
 
 /* Info Card */
-.info-card{background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:18px;padding:18px}
+.info-card{background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:18px;padding:18px;transition:all .3s cubic-bezier(0.4,0,0.2,1)}
+.info-card:hover{border-color:rgba(255,79,179,.2);transform:translateY(-3px);box-shadow:0 8px 25px rgba(255,79,179,.08)}
 .info-card h4{font-size:15px;margin-bottom:8px;color:#f7f1ff;font-weight:600}
 
-/* Footer */
+/* ═══ IMAGE MODAL ═══ */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:100;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all .4s cubic-bezier(0.4,0,0.2,1);backdrop-filter:blur(8px)}
+.modal-overlay.open{opacity:1;visibility:visible}
+.modal-content{position:relative;max-width:90vw;max-height:90vh;border-radius:20px;overflow:hidden;transform:scale(0.9) translateY(20px);transition:all .4s cubic-bezier(0.34,1.56,0.64,1);border:1px solid var(--line);box-shadow:0 25px 80px rgba(0,0,0,.5)}
+.modal-overlay.open .modal-content{transform:scale(1) translateY(0)}
+.modal-content img{width:auto;max-width:90vw;max-height:85vh;display:block;object-fit:contain}
+.modal-close{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.15);color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .25s;z-index:1;backdrop-filter:blur(4px)}
+.modal-close:hover{background:rgba(255,79,179,.6);border-color:var(--pink);transform:rotate(90deg)}
+.modal-caption{position:absolute;bottom:0;left:0;right:0;padding:16px 20px;background:linear-gradient(transparent,rgba(0,0,0,.8));color:#fff;font-size:14px;text-align:center}
+
+/* ═══ FOOTER ═══ */
 .footer-note{margin-top:16px;padding-top:16px;border-top:1px solid var(--line);color:#998db2;font-size:11px;text-align:center}
 
-/* Responsive */
+/* ═══ RESPONSIVE ═══ */
 @media(max-width:900px){
   .two-col{grid-template-columns:1fr}
   .sidebar-col{border-right:none;border-bottom:1px solid var(--line);padding:24px 0}
@@ -138,6 +190,7 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
   .tab-nav{padding:0 20px}
   .tab-panel{padding:24px 20px}
   .hero{padding:32px 20px}
+  .cta-area{padding:32px 20px}
   .case-summary{grid-template-columns:1fr 1fr}
   .project-grid{grid-template-columns:1fr}
 }
@@ -149,20 +202,32 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
   body{padding:16px 8px 40px}
   .resume{border-radius:20px}
   .case-summary{grid-template-columns:1fr}
+  .case-top{grid-template-columns:1fr}
+  .cta-btn{width:100%;justify-content:center}
 }
 
-/* Animations */
+/* ═══ ANIMATIONS ═══ */
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.fade-up{animation:fadeUp .5s ease-out both}
-.delay-1{animation-delay:.1s}.delay-2{animation-delay:.2s}.delay-3{animation-delay:.3s}.delay-4{animation-delay:.4s}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,79,179,.4)}50%{box-shadow:0 0 0 8px rgba(255,79,179,0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+.animate-float{animation:float 3s ease-in-out infinite}
+.animate-pulse-glow{animation:pulse 2s ease-in-out infinite}
+
+/* Stat counter animation */
+.stat-num{font-size:28px;font-weight:800;color:#fff;line-height:1.2;transition:all .3s}
 </style>
 </head>
 <body>
+
+<!-- PARTICLE CANVAS -->
+<canvas id="particles-canvas"></canvas>
+
 <div class="page">
 <div class="resume">
 
-<!-- HERO (always visible) -->
-<section class="hero fade-up">
+<!-- HERO -->
+<section class="hero gsap-fade">
   <div class="eyebrow"><i class="fa-solid fa-sparkles"></i> Winnie's Space · 2026</div>
   <h1>Winnie 王钰涵<br><span class="accent">数字艺术 × AI 创意 × 视觉设计</span></h1>
   <p class="intro">艺术与科技专业在读，擅长将 AI 工具、生成艺术与交互设计融合，创作可被看见、被体验的数字作品。关注文化遗产数字化、手势交互与视觉表达。</p>
@@ -173,8 +238,17 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
   </div>
 </section>
 
+<!-- CTA AREA WITH PARTICLES -->
+<div class="cta-area gsap-fade" id="cta">
+  <h2>✨ 探索我的创意世界</h2>
+  <p>从概念到现实，用代码和设计连接想象</p>
+  <button class="cta-btn animate-pulse-glow" onclick="switchTab('works', document.querySelectorAll('.tab-btn')[1])">
+    <i class="fa-solid fa-rocket"></i> 浏览作品集
+  </button>
+</div>
+
 <!-- TAB NAVIGATION -->
-<nav class="tab-nav fade-up">
+<nav class="tab-nav gsap-fade">
   <button class="tab-btn active" onclick="switchTab('home',this)"><i class="fa-solid fa-house"></i>首页</button>
   <button class="tab-btn" onclick="switchTab('works',this)"><i class="fa-solid fa-palette"></i>作品</button>
   <button class="tab-btn" onclick="switchTab('experience',this)"><i class="fa-solid fa-briefcase"></i>经历</button>
@@ -187,7 +261,7 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
 
   <!-- SIDEBAR -->
   <div class="sidebar-col">
-    <section class="section fade-up">
+    <section class="section gsap-fade">
       <div class="section-title"><i class="fa-solid fa-address-card"></i> 联系方式</div>
       <div class="contact-list">
         <div class="contact-item"><i class="fa-solid fa-phone"></i><div>199 0355 3288</div></div>
@@ -197,7 +271,7 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
       </div>
     </section>
 
-    <section class="section fade-up delay-1">
+    <section class="section gsap-fade delay-1">
       <div class="section-title"><i class="fa-solid fa-graduation-cap"></i> 教育背景</div>
       <div class="edu-card">
         <h4>长沙师范学院</h4>
@@ -206,7 +280,7 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
       </div>
     </section>
 
-    <section class="section fade-up delay-2">
+    <section class="section gsap-fade delay-2">
       <div class="section-title"><i class="fa-solid fa-screwdriver-wrench"></i> 工具技能</div>
       <div class="software-grid">
         <div class="software-item"><i class="fa-brands fa-adobe adobe"></i><span>Ai</span></div>
@@ -222,7 +296,7 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
       </div>
     </section>
 
-    <section class="section fade-up delay-3">
+    <section class="section gsap-fade delay-3">
       <div class="section-title"><i class="fa-solid fa-palette"></i> UI/UX 技能</div>
       <div class="skill-item" style="padding:12px 14px;margin-bottom:8px">
         <h4>设计方法</h4>
@@ -234,7 +308,7 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
       </div>
     </section>
 
-    <section class="section fade-up delay-4">
+    <section class="section gsap-fade delay-4">
       <div class="section-title"><i class="fa-solid fa-heart"></i> 关键词</div>
       <div class="quote-card">数字艺术 / 生成式视觉 / 文化遗产数字化 / AI 创意 / 手势交互 / 新媒体传播</div>
     </section>
@@ -242,13 +316,13 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
 
   <!-- MAIN -->
   <div class="main-col">
-    <div class="lead-card fade-up">
+    <div class="lead-card gsap-fade">
       <h2>用代码作笔，以粒子为墨——<br>在数字世界里创作有温度的艺术。</h2>
       <p>我是一名数字艺术创作者，专注于 AI 生成艺术、手势交互与文化遗产数字化。以下是我近期的核心项目经历。</p>
     </div>
 
     <!-- FEATURED: HairLab -->
-    <section class="case-study fade-up">
+    <section class="case-study gsap-fade">
       <div class="case-top">
         <div>
           <div class="sec-title" style="margin-bottom:6px"><i class="fa-solid fa-mobile-screen-button"></i> 重点作品</div>
@@ -264,19 +338,19 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
         <div class="summary-card"><label>状态</label><strong>概念完成<br>/ 持续迭代中 ✨</strong></div>
       </div>
       <div class="case-gallery">
-        <figure>
+        <figure onclick="openModal('hairlab1.jpg','HairLab 主界面 · AI 发型推荐流程')">
           <img src="hairlab1.jpg" alt="HairLab 界面预览" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'width:100%;height:200px;background:linear-gradient(135deg,#1a0e2e,#2a1540);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:64px\'>💇‍♀️</div><figcaption>📱 HairLab 主界面</figcaption>'">
-          <figcaption>📱 HairLab 主界面 · AI 发型推荐流程</figcaption>
+          <figcaption>📱 HairLab 主界面 · AI 发型推荐流程 <span style="color:var(--pink-soft);font-size:11px">[点击放大]</span></figcaption>
         </figure>
-        <figure>
+        <figure onclick="openModal('hairlab2.jpg','社区分享页面 · 用户作品展示')">
           <img src="hairlab2.jpg" alt="HairLab 社区页面" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'width:100%;height:200px;background:linear-gradient(135deg,#1a0e2e,#2a1540);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:64px\'>🎨</div><figcaption>🎨 社区分享页面</figcaption>'">
-          <figcaption>🎨 社区分享页面 · 用户作品展示</figcaption>
+          <figcaption>🎨 社区分享页面 · 用户作品展示 <span style="color:var(--pink-soft);font-size:11px">[点击放大]</span></figcaption>
         </figure>
       </div>
     </section>
 
-    <!-- Quick Links on Home -->
-    <section class="fade-up">
+    <!-- Quick Links -->
+    <section class="gsap-fade">
       <div class="sec-title"><i class="fa-solid fa-link"></i> 快速链接</div>
       <div class="link-grid">
         <a class="link-card" href="https://winniespace.netlify.app" target="_blank"><i class="fa-solid fa-globe"></i><div><div class="link-text">个人作品集</div><div class="link-sub">winniespace.netlify.app</div></div></a>
@@ -286,74 +360,88 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
       </div>
     </section>
   </div>
-
 </div>
 </div>
 
 <!-- ═══ TAB 2: WORKS ═══ -->
 <div class="tab-panel" id="tab-works">
-<div class="lead-card fade-up">
-  <h2>我的作品集</h2>
-  <p>从 AI 生成艺术到手势交互，从文化遗产数字化到概念 App 设计——每个项目都是技术与美学的交汇点。</p>
-</div>
-
-<!-- 交互艺术项目 -->
-<section class="fade-up">
-  <div class="sec-title"><i class="fa-solid fa-hand"></i> 交互艺术项目</div>
-  <div class="project-grid">
-    <div class="project-card">
-      <div style="height:160px;background:linear-gradient(135deg,#0d0918,#1a0e2e);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:48px">🌩️</div>
-      <h4>极端天气 · 手势控制数字生态</h4>
-      <p>基于 MediaPipe + p5.js 的手势交互作品。用摄像头识别手势，手指捏合触发"极端天气"粒子风暴效果，探索人机交互与自然现象的数字艺术表达。</p>
-    </div>
-    <div class="project-card">
-      <div style="height:160px;background:linear-gradient(135deg,#0d0918,#1a1328);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:48px">🏺</div>
-      <h4>数字文物 · 粒子化交互设计</h4>
-      <p>将文化遗产 3D 模型进行粒子化重构，使用 TouchDesigner 实现粒子消散与重组动画，探索文物数字化的新视觉语言与交互可能。</p>
+  <!-- Category Filter -->
+  <div class="gsap-fade" style="margin-bottom:24px">
+    <div class="sec-title"><i class="fa-solid fa-filter"></i> 分类筛选</div>
+    <div class="tags" id="filter-tags">
+      <span class="active-tag" onclick="filterWorks('all', this)">全部</span>
+      <span onclick="filterWorks('interactive', this)">🤚 交互艺术</span>
+      <span onclick="filterWorks('generative', this)">🎨 生成艺术</span>
+      <span onclick="filterWorks('concept', this)">📱 概念设计</span>
+      <span onclick="filterWorks('spatial', this)">🌊 空间叙事</span>
     </div>
   </div>
-</section>
 
-<!-- 更多作品 -->
-<section class="fade-up">
-  <div class="sec-title"><i class="fa-solid fa-code"></i> 更多作品</div>
-  <div class="project-grid">
-    <div class="project-card">
-      <div style="height:160px;background:linear-gradient(135deg,#0d0918,#0a1a18);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:48px">🎄</div>
+  <!-- Search -->
+  <div class="gsap-fade" style="margin-bottom:24px">
+    <div style="position:relative">
+      <i class="fa-solid fa-search" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:14px"></i>
+      <input type="text" id="works-search" placeholder="搜索作品..." oninput="searchWorks(this.value)" style="width:100%;padding:12px 16px 12px 40px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--text);font-family:'Inter',sans-serif;font-size:14px;outline:none;transition:all .3s" onfocus="this.style.borderColor='rgba(255,79,179,.3)';this.style.boxShadow='0 0 20px rgba(255,79,179,.1)'" onblur="this.style.borderColor='var(--line)';this.style.boxShadow='none'">
+    </div>
+  </div>
+
+  <div class="lead-card gsap-fade">
+    <h2>我的作品集</h2>
+    <p>从 AI 生成艺术到手势交互，从文化遗产数字化到概念 App 设计——每个项目都是技术与美学的交汇点。</p>
+  </div>
+
+  <!-- Works Grid -->
+  <div class="project-grid" id="works-grid">
+    <div class="project-card gsap-fade" data-category="interactive" data-name="极端天气 手势 交互 粒子">
+      <div style="height:160px;background:linear-gradient(135deg,#0d0918,#1a0e2e);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:48px;transition:transform .3s">🌩️</div>
+      <h4>极端天气 · 手势控制数字生态</h4>
+      <p>基于 MediaPipe + p5.js 的手势交互作品。用摄像头识别手势，手指捏合触发"极端天气"粒子风暴效果。</p>
+    </div>
+    <div class="project-card gsap-fade delay-1" data-category="interactive" data-name="文物 粒子 交互 TouchDesigner 3D">
+      <div style="height:160px;background:linear-gradient(135deg,#0d0918,#1a1328);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:48px;transition:transform .3s">🏺</div>
+      <h4>数字文物 · 粒子化交互设计</h4>
+      <p>将文化遗产 3D 模型进行粒子化重构，使用 TouchDesigner 实现粒子消散与重组动画。</p>
+    </div>
+    <div class="project-card gsap-fade" data-category="generative" data-name="圣诞树 生成艺术 p5.js 算法">
+      <div style="height:160px;background:linear-gradient(135deg,#0d0918,#0a1a18);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:48px;transition:transform .3s">🎄</div>
       <h4>圣诞树 · 生成艺术</h4>
       <p>基于 p5.js 的交互生成艺术作品，用算法模拟自然生长形态，支持实时参数调节与导出。</p>
       <a href="https://winnieoi.github.io/-01/" target="_blank">🌐 在线预览 →</a>
     </div>
-    <div class="project-card">
-      <div style="height:160px;background:linear-gradient(135deg,#0d0918,#1a1508);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:48px">🪨</div>
+    <div class="project-card gsap-fade delay-1" data-category="generative" data-name="玉性日历 Jade Calendar 东方 审美">
+      <div style="height:160px;background:linear-gradient(135deg,#0d0918,#1a1508);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:48px;transition:transform .3s">🪨</div>
       <h4>玉性日历 · Jade Calendar</h4>
-      <p>融合东方审美与数字交互的网页作品，以"玉"为意象构建沉浸式日历体验，强调材质感与时间的数字表达。</p>
+      <p>融合东方审美与数字交互的网页作品，以"玉"为意象构建沉浸式日历体验。</p>
       <a href="https://winnieoi.github.io/Jade-Calendar/" target="_blank">🌐 在线预览 →</a>
     </div>
-    <div class="project-card">
-      <div style="height:160px;background:linear-gradient(135deg,#0d0918,#0a1a18);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:48px">🌊</div>
+    <div class="project-card gsap-fade" data-category="concept" data-name="HairLab AI 发型 染发 社区 App">
+      <div style="height:160px;background:linear-gradient(135deg,#1a0e2e,#2a1540);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:48px;transition:transform .3s">💇‍♀️</div>
+      <h4>HairLab · AI 发型设计实验室</h4>
+      <p>融合 AI 图像生成与社区分享的发型设计概念 App，个性化发型推荐与社区展示。</p>
+    </div>
+    <div class="project-card gsap-fade delay-1" data-category="spatial" data-name="深海共生体 未来教室 材料 感知 决策">
+      <div style="height:160px;background:linear-gradient(135deg,#0d0918,#0a1a18);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:48px;transition:transform .3s">🌊</div>
       <h4>深海共生体 · 未来教室</h4>
-      <p>「深海共生体」未来教室材料智能感知与决策看板，探索未来教育空间的智能化视觉设计。</p>
+      <p>未来教室材料智能感知与决策看板，探索未来教育空间的智能化视觉设计。</p>
       <a href="https://winnieoi.github.io/deep-sea-classroom/" target="_blank">🌐 在线预览 →</a>
     </div>
-    <div class="project-card">
-      <div style="height:160px;background:linear-gradient(135deg,#0d0918,#150a1a);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:48px">🎵</div>
+    <div class="project-card gsap-fade" data-category="spatial" data-name="Musical Map 音乐 地图 交互 导航">
+      <div style="height:160px;background:linear-gradient(135deg,#0d0918,#150a1a);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:48px;transition:transform .3s">🎵</div>
       <h4>Musical Map</h4>
       <p>音乐地图交互体验，将听觉体验转化为可视化的空间叙事，探索音乐与地理的创意表达。</p>
       <a href="https://winnieoi.github.io/Musical-Map.github.io/" target="_blank">🌐 在线预览 →</a>
     </div>
   </div>
-</section>
 </div>
 
 <!-- ═══ TAB 3: EXPERIENCE ═══ -->
 <div class="tab-panel" id="tab-experience">
-  <div class="lead-card fade-up">
+  <div class="lead-card gsap-fade">
     <h2>项目经历</h2>
     <p>从黑客松到孵化营，从节目录制到设计峰会——每一次经历都在拓展我的创作边界。</p>
   </div>
 
-  <section class="fade-up">
+  <section class="gsap-fade">
     <div class="sec-title"><i class="fa-solid fa-rocket"></i> 项目经历</div>
     <div class="timeline">
       <div class="timeline-item">
@@ -379,7 +467,6 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
         <ul class="bullet-list">
           <li>参与小红书黑客松活动，负责项目的后续开发迭代与视觉应用包装。</li>
           <li>将黑客松原型转化为可展示的作品集级项目，完善交互流程与视觉呈现。</li>
-          <li>积累了从创意原型到完整作品包装的全流程经验。</li>
         </ul>
       </div>
       <div class="timeline-item">
@@ -409,9 +496,9 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
     </div>
   </section>
 
-  <section class="fade-up" style="margin-top:28px">
+  <section class="gsap-fade" style="margin-top:28px">
     <div class="sec-title"><i class="fa-solid fa-compass"></i> 个人经历</div>
-    <div class="two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
       <div class="info-card">
         <h4>🌍 独立旅行与在地体验</h4>
         <ul class="bullet-list">
@@ -433,15 +520,15 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
 
 <!-- ═══ TAB 4: ABOUT ═══ -->
 <div class="tab-panel" id="tab-about">
-  <div class="lead-card fade-up">
+  <div class="lead-card gsap-fade">
     <h2>关于我</h2>
     <p>用代码作笔，以粒子为墨。在数字世界里创作有温度的艺术。</p>
   </div>
 
   <div class="two-col">
-    <div class="sidebar-col" style="border-right:none;border-bottom:1px solid var(--line);padding:0 0 24px 0">
-      <section class="section fade-up">
-        <div class="section-title"><i class="fa-solid fa-address-card"></i> 联系方式</div>
+    <div style="padding:0 24px 24px 0;border-right:1px solid var(--line)">
+      <section class="gsap-fade">
+        <div class="sec-title"><i class="fa-solid fa-address-card"></i> 联系方式</div>
         <div class="contact-list">
           <div class="contact-item"><i class="fa-solid fa-phone"></i><div>199 0355 3288</div></div>
           <div class="contact-item"><i class="fa-solid fa-envelope"></i><div><a href="mailto:winnieoi2006@gmail.com">winnieoi2006@gmail.com</a><br><a href="mailto:1095845822@qq.com">1095845822@qq.com</a></div></div>
@@ -449,16 +536,16 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
           <div class="contact-item"><i class="fa-solid fa-location-dot"></i><div>长沙 · 可线下/远程</div></div>
         </div>
       </section>
-      <section class="section fade-up delay-1">
-        <div class="section-title"><i class="fa-solid fa-graduation-cap"></i> 教育背景</div>
+      <section class="gsap-fade delay-1">
+        <div class="sec-title"><i class="fa-solid fa-graduation-cap"></i> 教育背景</div>
         <div class="edu-card">
           <h4>长沙师范学院</h4>
           <p style="color:#ddd4ec;font-size:13px">艺术与科技专业 · 本科</p>
           <p style="color:#bfaed8;font-size:12px;margin-top:6px">2024 — 2028 · 大二在读</p>
         </div>
       </section>
-      <section class="section fade-up delay-2">
-        <div class="section-title"><i class="fa-solid fa-screwdriver-wrench"></i> 工具技能</div>
+      <section class="gsap-fade delay-2">
+        <div class="sec-title"><i class="fa-solid fa-screwdriver-wrench"></i> 工具技能</div>
         <div class="software-grid">
           <div class="software-item"><i class="fa-brands fa-adobe adobe"></i><span>Ai</span></div>
           <div class="software-item"><i class="fa-brands fa-adobe adobe"></i><span>PS</span></div>
@@ -472,8 +559,8 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
           <div class="software-item"><i class="fa-brands fa-apple ios"></i><span>iOS</span></div>
         </div>
       </section>
-      <section class="section fade-up delay-3">
-        <div class="section-title"><i class="fa-solid fa-palette"></i> UI/UX 技能</div>
+      <section class="gsap-fade delay-3">
+        <div class="sec-title"><i class="fa-solid fa-palette"></i> UI/UX 技能</div>
         <div class="skill-item" style="padding:12px 14px;margin-bottom:8px">
           <h4>设计方法</h4>
           <div class="tags" style="margin-top:6px"><span>用户调研</span><span>用户旅程图</span><span>信息架构</span><span>原型设计</span><span>可用性测试</span></div>
@@ -485,8 +572,8 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
       </section>
     </div>
 
-    <div class="main-col" style="padding:0 0 0 24px">
-      <section class="fade-up">
+    <div style="padding:0 0 0 24px">
+      <section class="gsap-fade">
         <div class="sec-title"><i class="fa-solid fa-link"></i> 全部链接</div>
         <div class="link-grid" style="margin-bottom:28px">
           <a class="link-card" href="https://winniespace.netlify.app" target="_blank"><i class="fa-solid fa-globe"></i><div><div class="link-text">个人作品集</div><div class="link-sub">winniespace.netlify.app</div></div></a>
@@ -496,7 +583,7 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
         </div>
       </section>
 
-      <section class="fade-up">
+      <section class="gsap-fade">
         <div class="sec-title"><i class="fa-solid fa-diagram-project"></i> 在线作品</div>
         <div class="link-grid">
           <a class="link-card" href="https://winnieoi.github.io/-01/" target="_blank"><i class="fa-solid fa-tree"></i><div><div class="link-text">圣诞树 · 生成艺术</div><div class="link-sub">p5.js 交互生成艺术</div></div></a>
@@ -506,7 +593,7 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
         </div>
       </section>
 
-      <section class="fade-up" style="margin-top:28px">
+      <section class="gsap-fade" style="margin-top:28px">
         <div class="sec-title"><i class="fa-solid fa-heart"></i> 关键词</div>
         <div class="quote-card">数字艺术 / 生成式视觉 / 文化遗产数字化 / AI 创意 / 手势交互 / 新媒体传播</div>
       </section>
@@ -520,14 +607,316 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
 </div>
 </div>
 
+<!-- IMAGE MODAL -->
+<div class="modal-overlay" id="imageModal" onclick="closeModal(event)">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <img id="modalImg" src="" alt="">
+    <div class="modal-caption" id="modalCaption"></div>
+  </div>
+</div>
+
 <script>
+// ═══════════════════════════════════════
+// TAB SWITCHING
+// ═══════════════════════════════════════
 function switchTab(tab, btn) {
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => {
+    p.classList.remove('active');
+    p.style.opacity = '0';
+    p.style.transform = 'translateY(12px)';
+  });
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('tab-' + tab).classList.add('active');
   btn.classList.add('active');
-  window.scrollTo({ top: document.querySelector('.tab-nav').offsetTop - 10, behavior: 'smooth' });
+
+  const panel = document.getElementById('tab-' + tab);
+  requestAnimationFrame(() => {
+    panel.classList.add('active');
+    requestAnimationFrame(() => {
+      panel.style.opacity = '1';
+      panel.style.transform = 'translateY(0)';
+      // Re-trigger scroll animations in new panel
+      observeElements();
+    });
+  });
+
+  // Update URL hash
+  history.replaceState(null, '', '#' + tab);
+
+  // Scroll to tab nav
+  const nav = document.querySelector('.tab-nav');
+  if (nav) nav.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
+
+// ═══════════════════════════════════════
+// SCROLL ANIMATIONS (Intersection Observer)
+// ═══════════════════════════════════════
+function observeElements() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.gsap-fade:not(.visible)').forEach(el => {
+    observer.observe(el);
+  });
+}
+observeElements();
+
+// ═══════════════════════════════════════
+// PARTICLE SYSTEM (CTA area)
+// ═══════════════════════════════════════
+const canvas = document.getElementById('particles-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+let animationId;
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+class Particle {
+  constructor() {
+    this.reset();
+  }
+  reset() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 2.5 + 0.5;
+    this.speedX = (Math.random() - 0.5) * 0.4;
+    this.speedY = (Math.random() - 0.5) * 0.4;
+    this.opacity = Math.random() * 0.5 + 0.1;
+    this.fadeSpeed = Math.random() * 0.003 + 0.001;
+    this.growing = Math.random() > 0.5;
+    // Color palette: pink, violet, cyan, white
+    const colors = [
+      '255,79,179', '139,92,246', '110,231,249', '247,243,255',
+      '255,126,200', '180,140,240'
+    ];
+    this.color = colors[Math.floor(Math.random() * colors.length)];
+  }
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    // Fade in/out
+    if (this.growing) {
+      this.opacity += this.fadeSpeed;
+      if (this.opacity >= 0.6) this.growing = false;
+    } else {
+      this.opacity -= this.fadeSpeed;
+      if (this.opacity <= 0.05) this.reset();
+    }
+    // Wrap around
+    if (this.x < 0) this.x = canvas.width;
+    if (this.x > canvas.width) this.x = 0;
+    if (this.y < 0) this.y = canvas.height;
+    if (this.y > canvas.height) this.y = 0;
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${this.color},${this.opacity})`;
+    ctx.fill();
+    // Glow effect
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size * 2.5, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${this.color},${this.opacity * 0.15})`;
+    ctx.fill();
+  }
+}
+
+// Create particles
+for (let i = 0; i < 60; i++) {
+  particles.push(new Particle());
+}
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => {
+    p.update();
+    p.draw();
+  });
+
+  // Draw connections between nearby particles
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 120) {
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.strokeStyle = `rgba(255,79,179,${0.06 * (1 - dist / 120)})`;
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+    }
+  }
+
+  animationId = requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+// Pause particles when tab is hidden
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    cancelAnimationFrame(animationId);
+  } else {
+    animateParticles();
+  }
+});
+
+// ═══════════════════════════════════════
+// IMAGE MODAL
+// ═══════════════════════════════════════
+function openModal(src, caption) {
+  const modal = document.getElementById('imageModal');
+  const img = document.getElementById('modalImg');
+  const cap = document.getElementById('modalCaption');
+  img.src = src;
+  cap.textContent = caption;
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(event) {
+  if (event && event.target !== event.currentTarget) return;
+  const modal = document.getElementById('imageModal');
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Close with Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeModal();
+});
+
+// ═══════════════════════════════════════
+// WORK FILTER (Category + Search)
+// ═══════════════════════════════════════
+function filterWorks(category, el) {
+  // Update active tag
+  document.querySelectorAll('#filter-tags span').forEach(s => s.classList.remove('active-tag'));
+  if (el) el.classList.add('active-tag');
+
+  const cards = document.querySelectorAll('#works-grid .project-card');
+  cards.forEach(card => {
+    const cat = card.dataset.category;
+    if (category === 'all' || cat === category) {
+      card.style.display = '';
+      card.style.animation = 'fadeUp .4s ease-out both';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+function searchWorks(query) {
+  query = query.toLowerCase().trim();
+  const cards = document.querySelectorAll('#works-grid .project-card');
+  cards.forEach(card => {
+    const name = (card.dataset.name || '').toLowerCase();
+    const text = card.textContent.toLowerCase();
+    if (!query || name.includes(query) || text.includes(query)) {
+      card.style.display = '';
+      card.style.animation = 'fadeUp .4s ease-out both';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+// ═══════════════════════════════════════
+// COUNTER ANIMATION (stats on scroll)
+// ═══════════════════════════════════════
+function animateCounters() {
+  const counters = document.querySelectorAll('[data-count]');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.dataset.count);
+        const duration = 1500;
+        const start = performance.now();
+
+        function update(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          // Ease out cubic
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.round(target * eased);
+          if (progress < 1) requestAnimationFrame(update);
+        }
+        requestAnimationFrame(update);
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  counters.forEach(c => observer.observe(c));
+}
+animateCounters();
+
+// ═══════════════════════════════════════
+// MAGNETIC BUTTON EFFECT (CTA)
+// ═══════════════════════════════════════
+const ctaBtn = document.querySelector('.cta-btn');
+if (ctaBtn) {
+  ctaBtn.addEventListener('mousemove', (e) => {
+    const rect = ctaBtn.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    ctaBtn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px) scale(1.03)`;
+  });
+  ctaBtn.addEventListener('mouseleave', () => {
+    ctaBtn.style.transform = '';
+  });
+}
+
+// ═══════════════════════════════════════
+// PARALLAX ON HERO
+// ═══════════════════════════════════════
+const hero = document.querySelector('.hero');
+if (hero) {
+  window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const rate = scrolled * 0.3;
+    hero.style.backgroundPositionY = rate + 'px';
+  }, { passive: true });
+}
+
+// ═══════════════════════════════════════
+// SMOOTH SCROLL NAV (click nav links)
+// ═══════════════════════════════════════
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if (href === '#') return;
+    e.preventDefault();
+    const target = document.querySelector(href);
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+// ═══════════════════════════════════════
+// INIT: Check URL hash for deep link
+// ═══════════════════════════════════════
+window.addEventListener('DOMContentLoaded', () => {
+  const hash = window.location.hash.replace('#', '');
+  const tabMap = { home: 0, works: 1, experience: 2, about: 3 };
+  if (tabMap[hash] !== undefined) {
+    const btn = document.querySelectorAll('.tab-btn')[tabMap[hash]];
+    switchTab(hash, btn);
+  }
+});
 </script>
 </body>
 </html>
