@@ -134,6 +134,25 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
 .summary-card:hover{border-color:rgba(139,92,246,.25);background:rgba(139,92,246,.05);transform:translateY(-2px)}
 .summary-card label{display:block;color:#bcaed3;font-size:10px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;font-weight:500}
 .summary-card strong{font-size:14px;line-height:1.35}
+
+/* ═══ CAROUSEL ═══ */
+.carousel-wrap{position:relative;margin-top:20px;overflow:hidden;border-radius:16px}
+.carousel-track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;padding:4px 4px 16px;cursor:grab}
+.carousel-track::-webkit-scrollbar{height:6px}
+.carousel-track::-webkit-scrollbar-track{background:rgba(255,255,255,.05);border-radius:3px}
+.carousel-track::-webkit-scrollbar-thumb{background:rgba(255,79,179,.3);border-radius:3px}
+.carousel-slide{flex:0 0 55%;min-width:280px;scroll-snap-align:center;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--card);transition:transform .3s}
+.carousel-slide:hover{transform:scale(1.01)}
+.carousel-slide img{width:100%;height:420px;object-fit:cover;display:block;background:#0d0918}
+.carousel-slide figcaption{text-align:center;font-size:12px;color:#d5cae6;padding:10px 8px 6px;line-height:1.5}
+.carousel-nav{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;background:rgba(12,8,20,.7);border:1px solid var(--line);color:var(--text);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .25s;backdrop-filter:blur(4px);z-index:2}
+.carousel-nav:hover{background:rgba(255,79,179,.3);border-color:var(--pink)}
+.carousel-prev{left:8px}
+.carousel-next{right:8px}
+.carousel-dots{display:flex;gap:6px;justify-content:center;margin-top:12px}
+.carousel-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.15);cursor:pointer;transition:all .3s}
+.carousel-dot.active{background:var(--pink-soft);box-shadow:0 0 6px rgba(255,126,200,.5);transform:scale(1.2)}
+
 .case-gallery{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
 .case-gallery figure{background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:16px;padding:10px;overflow:hidden;transition:all .3s cubic-bezier(0.4,0,0.2,1);cursor:pointer}
 .case-gallery figure:hover{border-color:rgba(255,79,179,.2);transform:translateY(-4px) scale(1.01);box-shadow:0 12px 30px rgba(255,79,179,.1)}
@@ -202,6 +221,8 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
   .case-summary{grid-template-columns:1fr 1fr}
   .project-grid{grid-template-columns:1fr}
   .section-indicator{display:none}
+  .carousel-slide{flex:0 0 80%}
+  .carousel-slide img{height:280px}
 }
 @media(max-width:600px){
   h1{font-size:28px}
@@ -325,7 +346,7 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
     <section class="case-study gsap-fade">
       <div class="case-top">
         <div>
-          <div class="sec-title" style="margin-bottom:6px"><i class="fa-solid fa-mobile-screen-button"></i> 重点作品</div>
+          <div class="sec-title" style="margin-bottom:6px"><i class="fa-solid fa-mobile-screen-button"></i> 独立作品</div>
           <h3>HairLab · AI 发型设计实验室</h3>
           <p style="color:#d8caec;max-width:600px;margin-top:8px;line-height:1.7">一个融合 AI 图像生成与社区分享的发型设计概念 App。用户上传照片即可预览不同发型效果，结合生成式 AI 实现个性化发型推荐，并内置社区板块展示用户创作。</p>
         </div>
@@ -337,16 +358,25 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
         <div class="summary-card"><label>技术</label><strong>AI 图像生成<br>/ UI 交互设计</strong></div>
         <div class="summary-card"><label>状态</label><strong>概念完成<br>/ 持续迭代中 ✨</strong></div>
       </div>
-      <div class="case-gallery">
-        <figure onclick="openModal('hairlab1.jpg','HairLab 主界面 · AI 发型推荐流程')">
-          <img src="hairlab1.jpg" alt="HairLab 界面预览" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'width:100%;height:200px;background:linear-gradient(135deg,#1a0e2e,#2a1540);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:64px\'>💇‍♀️</div><figcaption>📱 HairLab 主界面</figcaption>'">
-          <figcaption>📱 HairLab 主界面 · AI 发型推荐流程 <span style="color:var(--pink-soft);font-size:11px">[点击放大]</span></figcaption>
-        </figure>
-        <figure onclick="openModal('hairlab2.jpg','社区分享页面 · 用户作品展示')">
-          <img src="hairlab2.jpg" alt="HairLab 社区页面" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'width:100%;height:200px;background:linear-gradient(135deg,#1a0e2e,#2a1540);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:64px\'>🎨</div><figcaption>🎨 社区分享页面</figcaption>'">
-          <figcaption>🎨 社区分享页面 · 用户作品展示 <span style="color:var(--pink-soft);font-size:11px">[点击放大]</span></figcaption>
-        </figure>
+      <div class="carousel-wrap">
+        <div class="carousel-track" id="hairlabCarousel">
+          <div class="carousel-slide">
+            <img src="hairlab1.jpg" alt="HairLab 主界面" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22420%22><rect fill=%22%231a0e2e%22 width=%22400%22 height=%22420%22/><text x=%2250%25%22 y=%2250%25%22 fill=%22%23ff7ec8%22 font-size=%2264%22 text-anchor=%22middle%22 dy=%22.3em%22>💇‍♀️</text></svg>'">
+            <figcaption>📱 HairLab 主界面 · AI 发质检测与智能发色推荐</figcaption>
+          </div>
+          <div class="carousel-slide">
+            <img src="hairlab2.jpg" alt="HairLab 社区" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22420%22><rect fill=%22%231a0e2e%22 width=%22400%22 height=%22420%22/><text x=%2250%25%22 y=%2250%25%22 fill=%22%23ff7ec8%22 font-size=%2264%22 text-anchor=%22middle%22 dy=%22.3em%22>🎨</text></svg>'">
+            <figcaption>🎨 美妆社区 · 分享染发心得与灵感</figcaption>
+          </div>
+          <div class="carousel-slide">
+            <img src="hairlab-cover.jpg" alt="HairLab 完整展示" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22420%22><rect fill=%22%231a0e2e%22 width=%22400%22 height=%22420%22/><text x=%2250%25%22 y=%2250%25%22 fill=%22%23ff7ec8%22 font-size=%2264%22 text-anchor=%22middle%22 dy=%22.3em%22>✨</text></svg>'">
+            <figcaption>✨ HairLab 完整功能展示 · 滑动探索更多</figcaption>
+          </div>
+        </div>
+        <button class="carousel-nav carousel-prev" onclick="scrollCarousel(-1)">&#10094;</button>
+        <button class="carousel-nav carousel-next" onclick="scrollCarousel(1)">&#10095;</button>
       </div>
+      <div class="carousel-dots" id="carouselDots"></div>
     </section>
 
     <!-- Quick Links -->
@@ -922,6 +952,59 @@ document.addEventListener('keydown', (e) => {
     closeJumpModal();
   }
 });
+
+// ═══════════════════════════════════════
+// CAROUSEL (HairLab showcase)
+// ═══════════════════════════════════════
+(function() {
+  const track = document.getElementById('hairlabCarousel');
+  const dotsContainer = document.getElementById('carouselDots');
+  if (!track || !dotsContainer) return;
+
+  const slides = track.querySelectorAll('.carousel-slide');
+  const totalSlides = slides.length;
+
+  // Create dots
+  for (let i = 0; i < totalSlides; i++) {
+    const dot = document.createElement('span');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => scrollToSlide(i));
+    dotsContainer.appendChild(dot);
+  }
+
+  function scrollToSlide(index) {
+    const slide = slides[index];
+    if (!slide) return;
+    track.scrollTo({ left: slide.offsetLeft - track.offsetLeft - 8, behavior: 'smooth' });
+  }
+
+  window.scrollCarousel = function(dir) {
+    const current = Math.round(track.scrollLeft / (track.clientWidth * 0.55)) || 0;
+    const next = Math.max(0, Math.min(totalSlides - 1, current + dir));
+    scrollToSlide(next);
+  };
+
+  // Update dots on scroll
+  track.addEventListener('scroll', () => {
+    const scrollLeft = track.scrollLeft;
+    let closest = 0;
+    let minDist = Infinity;
+    slides.forEach((slide, i) => {
+      const dist = Math.abs(slide.offsetLeft - track.offsetLeft - scrollLeft);
+      if (dist < minDist) { minDist = dist; closest = i; }
+    });
+    dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === closest);
+    });
+  }, { passive: true });
+
+  // Touch drag support
+  let isDown = false, startX, scrollLeftPos;
+  track.addEventListener('mousedown', (e) => { isDown = true; track.style.cursor = 'grabbing'; startX = e.pageX - track.offsetLeft; scrollLeftPos = track.scrollLeft; });
+  track.addEventListener('mouseleave', () => { isDown = false; track.style.cursor = 'grab'; });
+  track.addEventListener('mouseup', () => { isDown = false; track.style.cursor = 'grab'; });
+  track.addEventListener('mousemove', (e) => { if (!isDown) return; e.preventDefault(); const x = e.pageX - track.offsetLeft; track.scrollLeft = scrollLeftPos - (x - startX) * 1.5; });
+})();
 
 // ═══════════════════════════════════════
 // COUNTER ANIMATION
