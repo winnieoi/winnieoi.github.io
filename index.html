@@ -398,9 +398,13 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
       <p>基于 MediaPipe + p5.js 的手势交互作品。用摄像头识别手势，手指捏合触发"极端天气"粒子风暴效果。</p>
     </div>
     <div class="project-card gsap-fade delay-1" data-category="interactive" data-name="文物 粒子 交互 TouchDesigner 3D">
-      <div style="height:160px;background:linear-gradient(135deg,#0d0918,#1a1328);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:48px;transition:transform .3s">🏺</div>
-      <h4>数字文物 · 粒子化交互设计</h4>
-      <p>将文化遗产 3D 模型进行粒子化重构，使用 TouchDesigner 实现粒子消散与重组动画。</p>
+      <figure onclick="openModal('wenwu-video.mp4','数字文物 · 粒子化交互设计 — TouchDesigner 视频')" style="cursor:pointer">
+        <img src="wenwu-illustration.jpg" alt="数字文物·粒子化交互设计" class="project-img" style="height:200px">
+        <figcaption style="text-align:center;font-size:11px;color:var(--muted);margin-top:6px">点击查看详情 →</figcaption>
+      </figure>
+      <h4 style="margin-top:10px">数字文物 · 粒子化交互设计</h4>
+      <p>将文化遗产 3D 模型进行粒子化重构，使用 TouchDesigner 实现粒子消散与重组动画，探索文物数字化的新视觉语言与交互可能。</p>
+      <a href="javascript:void(0)" onclick="openModal('wenwu-video.mp4','数字文物 · 粒子化交互设计 — TouchDesigner 视频')">🎬 播放视频 →</a>
     </div>
     <div class="project-card gsap-fade" data-category="generative" data-name="圣诞树 生成艺术 p5.js 算法">
       <div style="height:160px;background:linear-gradient(135deg,#0d0918,#0a1a18);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:48px;transition:transform .3s">🎄</div>
@@ -611,7 +615,10 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
 <div class="modal-overlay" id="imageModal" onclick="closeModal(event)">
   <div class="modal-content" onclick="event.stopPropagation()">
     <button class="modal-close" onclick="closeModal()">&times;</button>
-    <img id="modalImg" src="" alt="">
+    <div id="modalBody" style="display:flex;align-items:center;justify-content:center;min-height:200px">
+      <img id="modalImg" src="" alt="" style="max-width:90vw;max-height:85vh;display:block;object-fit:contain;border-radius:12px">
+      <video id="modalVideo" src="" controls style="max-width:90vw;max-height:85vh;display:none;border-radius:12px;background:#000"></video>
+    </div>
     <div class="modal-caption" id="modalCaption"></div>
   </div>
 </div>
@@ -775,13 +782,25 @@ document.addEventListener('visibilitychange', () => {
 });
 
 // ═══════════════════════════════════════
-// IMAGE MODAL
+// IMAGE MODAL (supports image + video)
 // ═══════════════════════════════════════
 function openModal(src, caption) {
   const modal = document.getElementById('imageModal');
   const img = document.getElementById('modalImg');
+  const video = document.getElementById('modalVideo');
   const cap = document.getElementById('modalCaption');
-  img.src = src;
+
+  if (src.endsWith('.mp4') || src.endsWith('.mov') || src.endsWith('.webm')) {
+    img.style.display = 'none';
+    video.style.display = 'block';
+    video.src = src;
+    video.play();
+  } else {
+    video.style.display = 'none';
+    video.pause();
+    img.style.display = 'block';
+    img.src = src;
+  }
   cap.textContent = caption;
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -792,6 +811,10 @@ function closeModal(event) {
   const modal = document.getElementById('imageModal');
   modal.classList.remove('open');
   document.body.style.overflow = '';
+
+  // Stop video if playing
+  const video = document.getElementById('modalVideo');
+  if (video) { video.pause(); video.src = ''; }
 }
 
 // Close with Escape key
