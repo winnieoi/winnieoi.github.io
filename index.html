@@ -210,7 +210,7 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
 .footer-note{margin-top:16px;padding-top:16px;border-top:1px solid var(--line);color:#998db2;font-size:11px;text-align:center}
 
 /* ═══ RESPONSIVE ═══ */
-@media(max-width:900px){
+@media(max-width:768px){
   .tab-panel{padding:20px 16px}
   .two-col{grid-template-columns:1fr}
   .sidebar-col{border-right:none;border-bottom:1px solid var(--line);padding:20px 0}
@@ -222,23 +222,37 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
   .eyebrow{font-size:11px;padding:6px 12px}
   .hero-meta{gap:7px;margin-top:14px}
   .pill{font-size:11px;padding:5px 12px}
-  .case-summary{grid-template-columns:1fr 1fr;gap:8px}
+  .case-summary{grid-template-columns:1fr 1fr;gap:10px;margin:14px 0 16px}
+  .summary-card{padding:14px;border-radius:14px}
+  .summary-card label{font-size:10px;margin-bottom:4px}
+  .summary-card strong{font-size:13px;line-height:1.4;word-break:keep-all;overflow-wrap:normal}
   .project-grid{grid-template-columns:1fr}
   .section-indicator{display:none}
-  /* Carousel: wider slides, nicer scroll */
+  /* Carousel: wider slides */
   .carousel-slide{flex:0 0 75%;min-width:240px}
   .carousel-slide img{height:260px}
   .carousel-track{padding:2px 2px 12px}
-  /* case-gallery: switch to carousel-like horizontal scroll on tablet */
-  .case-gallery{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;gap:12px;padding:2px 2px 12px;grid-template-columns:unset}
-  .case-gallery figure{min-width:75vw;flex-shrink:0;scroll-snap-align:start;max-width:75vw}
-  .case-gallery img{height:200px}
+  /* case-gallery: horizontal scroll */
+  .case-gallery{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;gap:12px;padding:2px 2px 12px}
+  .case-gallery figure{min-width:75vw;flex-shrink:0;scroll-snap-align:start}
+  .case-gallery img{height:200px;border-radius:12px}
   .case-gallery figcaption{font-size:11px;margin-top:6px}
   .case-gallery::-webkit-scrollbar{height:4px}
   .case-gallery::-webkit-scrollbar-thumb{background:rgba(255,79,179,.25);border-radius:2px}
-  /* Project cards single col */
-  .project-card{padding:16px}
+  /* Project cards */
+  .project-card{padding:18px;border-radius:20px}
   .project-card .project-img{height:180px}
+  /* Prevent Chinese text character-by-character wrapping */
+  .case-study h3{word-break:keep-all}
+  .case-study p{word-break:keep-all;overflow-wrap:normal}
+  .lead-card h2{word-break:keep-all}
+  .lead-card p{word-break:keep-all;overflow-wrap:normal}
+  .project-card h4{word-break:keep-all}
+  .project-card p{word-break:keep-all;overflow-wrap:normal}
+  .section-title{word-break:keep-all}
+  .sec-title{word-break:keep-all}
+  .case-top h3{word-break:keep-all}
+  .badge{word-break:keep-all}
 }
 @media(max-width:600px){
   /* Hero */
