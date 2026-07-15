@@ -210,12 +210,12 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
 .footer-note{margin-top:16px;padding-top:16px;border-top:1px solid var(--line);color:#998db2;font-size:11px;text-align:center}
 
 /* ═══ RESPONSIVE ═══ */
-@media(max-width:768px){
+@media(max-width:900px){
   .tab-panel{padding:20px 16px}
   .two-col{grid-template-columns:1fr}
   .sidebar-col{border-right:none;border-bottom:1px solid var(--line);padding:20px 0}
   .main-col{padding:20px 0}
-  h1{font-size:34px}
+  h1{font-size:36px}
   .intro{font-size:15px;max-width:100%}
   .tab-nav{padding:0 16px}
   .hero{padding:28px 16px}
@@ -223,14 +223,14 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
   .hero-meta{gap:7px;margin-top:14px}
   .pill{font-size:11px;padding:5px 12px}
   /* Prevent right overflow */
-  .page{padding:0}
+  .page{overflow-x:hidden}
   .resume{max-width:100%;overflow-x:hidden}
-  .tab-panel{overflow-x:hidden}
+  .tab-panel{max-width:100%;overflow-x:hidden}
+  .main-col{max-width:100%;overflow-x:hidden}
+  .sidebar-col{max-width:100%;overflow-x:hidden}
   /* Case summary */
   .case-summary{grid-template-columns:1fr 1fr;gap:8px;margin:14px 0 16px}
-  .summary-card{padding:12px;border-radius:14px}
-  .summary-card label{font-size:9px;margin-bottom:3px}
-  .summary-card strong{font-size:13px;line-height:1.4}
+  .summary-card{padding:14px;border-radius:16px}
   .project-grid{grid-template-columns:1fr}
   .section-indicator{display:none}
   .carousel-slide{flex:0 0 75%;min-width:240px}
@@ -245,27 +245,48 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
   .case-study p,.lead-card p,.project-card p,.summary-card strong{word-break:keep-all;overflow-wrap:normal}
 }
 @media(max-width:600px){
-  h1{font-size:26px;line-height:1.1;letter-spacing:-.02em}
+  /* Compact card padding only, keep all fonts from 900px */
   .hero{padding:20px 12px}
-  .intro{font-size:14px;line-height:1.7;margin-top:8px}
-  .hero-meta{gap:6px;margin-top:12px}
-  .pill{font-size:11px;padding:5px 10px;backdrop-filter:none}
-  .eyebrow{font-size:11px;padding:5px 10px}
-  .tab-panel{padding:14px 10px}
-  .sidebar-col{padding:14px 0}
-  .main-col{padding:14px 0}
-  body{padding:6px 4px 28px}
-  .resume{border-radius:18px;max-width:100%}
-  .page{overflow-x:hidden}
+  body{padding:8px 4px 32px}
+  .resume{border-radius:20px}
   .section{margin-bottom:16px}
+  /* Sidebar: compact boxes */
+  .contact-item{padding:8px 10px;border-radius:14px}
+  .contact-item i{width:16px;margin-top:2px}
+  .skill-item{padding:8px 10px;margin-bottom:6px;border-radius:14px}
+  .skill-item h4{margin-bottom:4px}
+  .edu-card{padding:8px 10px;border-radius:14px}
+  .edu-card h4{margin-bottom:4px}
+  .quote-card{padding:8px 10px;border-radius:14px}
+  .software-grid{gap:5px}
+  .software-item{padding:8px 3px;border-radius:11px}
+  .software-item i{font-size:16px}
+  .software-grid{grid-template-columns:repeat(3,1fr)}
+  .tags span{font-size:10px;padding:3px 8px}
+  /* Main: compact boxes */
+  .lead-card{padding:16px 16px;margin-bottom:18px;border-radius:18px}
+  .case-study{padding:16px;margin-bottom:16px;border-radius:20px}
+  .case-top{gap:8px;margin-bottom:10px}
+  .case-summary{gap:6px;margin:10px 0 14px}
+  .summary-card{padding:10px;border-radius:14px}
+  .case-study p[style]{font-size:14px !important;margin-top:6px !important;line-height:1.7 !important;max-width:100% !important}
+  .badge{font-size:11px;padding:5px 11px}
+  .link-grid{gap:8px}
+  .link-card{padding:12px 14px;border-radius:14px}
+  .info-card{padding:14px;border-radius:16px}
+  .info-card h4{margin-bottom:6px}
+  .timeline-head h4{font-size:15px}
+  .timeline-head span{font-size:11px;padding:2px 8px}
+  .sub{font-size:12px;margin-bottom:8px}
+  .bullet-list li{font-size:13px;line-height:1.6;padding-left:14px}
+  .bullet-list li::before{width:5px;height:5px;top:6px}
+  .cta-area{padding:24px 16px}
+  .cta-btn{width:100%;justify-content:center}
+  .footer-note{font-size:11px;margin-top:10px;padding-top:10px}
+  .section-title,.sec-title{font-size:13px;margin-bottom:10px;gap:8px}
+  .section-title::after,.sec-title::after{display:none}
   .hero::after{width:80px;height:80px;top:-15px;right:-15px}
-  .lead-card{padding:14px 12px;margin-bottom:16px}
-  .lead-card h2{font-size:20px;margin-bottom:8px}
-  .case-study{padding:14px 12px;margin-bottom:16px}
-  .case-top h3{font-size:20px}
-  .case-summary{grid-template-columns:1fr;gap:6px;margin:10px 0 12px}
-  .summary-card{padding:10px;border-radius:12px}
-  .summary-card strong{font-size:13px}
+  /* Carousel */
   .carousel-slide{flex:0 0 82%;min-width:200px}
   .carousel-slide img{height:200px}
   .carousel-nav{width:30px;height:30px;font-size:13px}
@@ -275,32 +296,11 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
   .case-gallery img{height:160px}
   .project-grid{gap:10px}
   .project-card{padding:14px;border-radius:16px}
-  .project-card .project-img{height:140px}
-  .software-grid{gap:5px}
-  .software-item{padding:8px 3px;font-size:11px}
-  .software-item i{font-size:16px}
-  .contact-item{padding:8px 10px;border-radius:14px}
-  .contact-item i{width:16px;margin-top:2px}
-  .skill-item{padding:8px 10px;margin-bottom:6px;border-radius:14px}
-  .skill-item h4{font-size:14px;margin-bottom:4px}
-  .edu-card{padding:8px 10px;border-radius:14px}
-  .edu-card h4{font-size:14px}
-  .quote-card{padding:8px 10px;border-radius:14px}
-  .info-card{padding:12px;border-radius:14px}
-  .info-card h4{font-size:13px}
-  .timeline-head h4{font-size:14px}
-  .timeline-head span{font-size:10px}
-  .bullet-list li{font-size:12.5px}
-  .link-card{padding:12px;border-radius:14px}
-  .cta-area{padding:20px 16px}
-  .cta-area h2{font-size:16px}
-  .cta-btn{width:100%}
-  .footer-note{font-size:10px;margin-top:10px;padding-top:10px}
-  .section-title,.sec-title{font-size:12px;margin-bottom:10px;gap:8px}
-  .section-title::after,.sec-title::after{display:none}
+  .project-card h4{font-size:16px;margin-bottom:6px}
+  .project-card p{font-size:13px;line-height:1.6;margin-bottom:10px}
+  .project-card .project-img{height:140px;border-radius:12px;margin-bottom:12px}
+  .project-card a{font-size:13px}
 }
-@keyframes hintBounce{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
-
 /* ═══ ANIMATIONS ═══ */
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,79,179,.4)}50%{box-shadow:0 0 0 8px rgba(255,79,179,0)}}
@@ -361,8 +361,8 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
       <div class="section-title"><i class="fa-solid fa-graduation-cap"></i> 教育背景</div>
       <div class="edu-card">
         <h4>长沙师范学院</h4>
-        <p style="color:#ddd4ec;font-size:13px">艺术与科技专业 · 本科</p>
-        <p style="color:#bfaed8;font-size:12px;margin-top:6px">2024 — 2028 · 大二在读</p>
+        <p>艺术与科技专业 · 本科</p>
+        <p>2024 — 2028 · 大二在读</p>
       </div>
     </section>
 
@@ -384,13 +384,13 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
 
     <section class="section gsap-fade delay-3">
       <div class="section-title"><i class="fa-solid fa-palette"></i> UI/UX 技能</div>
-      <div class="skill-item" style="padding:12px 14px;margin-bottom:8px">
+      <div class="skill-item">
         <h4>设计方法</h4>
-        <div class="tags" style="margin-top:6px"><span>用户调研</span><span>用户旅程图</span><span>信息架构</span><span>原型设计</span><span>可用性测试</span></div>
+        <div class="tags"><span>用户调研</span><span>用户旅程图</span><span>信息架构</span><span>原型设计</span><span>可用性测试</span></div>
       </div>
-      <div class="skill-item" style="padding:12px 14px">
+      <div class="skill-item">
         <h4>输出能力</h4>
-        <div class="tags" style="margin-top:6px"><span>高保真原型</span><span>设计系统</span><span>交互说明文档</span><span>组件库搭建</span></div>
+        <div class="tags"><span>高保真原型</span><span>设计系统</span><span>交互说明文档</span><span>组件库搭建</span></div>
       </div>
     </section>
 
@@ -413,7 +413,7 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
         <div>
           <div class="sec-title" style="margin-bottom:6px"><i class="fa-solid fa-mobile-screen-button"></i> 独立作品</div>
           <h3>HairLab · AI 发型设计实验室</h3>
-          <p style="color:#d8caec;max-width:600px;margin-top:8px;line-height:1.7">一个融合 AI 图像生成与社区分享的发型设计概念 App。用户上传照片即可预览不同发型效果，结合生成式 AI 实现个性化发型推荐，并内置社区板块展示用户创作。</p>
+          <p>一个融合 AI 图像生成与社区分享的发型设计概念 App。用户上传照片即可预览不同发型效果，结合生成式 AI 实现个性化发型推荐，并内置社区板块展示用户创作。</p>
         </div>
         <div class="badge">📱 App 概念 · 2026</div>
       </div>
