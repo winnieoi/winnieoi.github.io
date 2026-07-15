@@ -255,8 +255,14 @@ h1{font-size:48px;line-height:1.1;letter-spacing:-.04em;margin-bottom:16px;font-
   body{padding:6px 4px 28px}
   .resume{border-radius:18px}
   .section{margin-bottom:20px}
-  /* Section titles */
-  .section-title,.sec-title{font-size:11px;gap:8px;margin-bottom:12px;letter-spacing:.08em}
+  /* Hero: prevent text & decorative overflow */
+  .hero::after{width:150px;height:150px;top:-30px;right:-30px}
+  .accent{display:inline;word-break:break-word}
+  .hero-meta{flex-wrap:wrap}
+  .pill{white-space:normal;word-break:break-word;overflow-wrap:anywhere;display:inline-flex;align-items:center}
+  .intro{word-break:break-word;overflow-wrap:anywhere}
+  /* section titles: prevent ::after line overflow */
+  .section-title,.sec-title{font-size:11px;gap:8px;margin-bottom:12px;letter-spacing:.08em;overflow:hidden;white-space:nowrap;word-break:keep-all}
   /* Lead card */
   .lead-card{padding:16px 14px;border-radius:16px;margin-bottom:20px}
   .lead-card h2{font-size:16px;line-height:1.35;margin-bottom:8px}
